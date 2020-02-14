@@ -14,6 +14,8 @@
 		05765B101EBB99D300D2DDDE /* Xclean.icns in Resources */ = {isa = PBXBuildFile; fileRef = 05765B0F1EBB99D300D2DDDE /* Xclean.icns */; };
 		059B3B7E1ECE2CC500D5013A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059B3B7D1ECE2CC500D5013A /* Security.framework */; };
 		05A364F01EC23007003A93EF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A364EF1EC23007003A93EF /* Cocoa.framework */; };
+		05D26C0023F7368C006A0D5B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D26BFF23F7368C006A0D5B /* MainViewController.swift */; };
+		05D26C0323F736AC006A0D5B /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05D26C0123F736AC006A0D5B /* MainViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		05C83DC82141797C00A9ED6D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		05C83DCA2141797C00A9ED6D /* ccache-config.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "ccache-config.sh"; sourceTree = "<group>"; };
 		05C83DCB2141797C00A9ED6D /* ccache.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ccache.sh; sourceTree = "<group>"; };
+		05D26BFF23F7368C006A0D5B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		05D26C0223F736AC006A0D5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 				050B84FB1EB9CCD60090EA12 /* Images */,
 				050B84F81EB9C90C0090EA12 /* MainMenu.xib */,
 				055981F923F55F680026F198 /* AboutWindowController.xib */,
+				05D26C0123F736AC006A0D5B /* MainViewController.xib */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 			children = (
 				055981F523F55D3A0026F198 /* ApplicationDelegate.swift */,
 				055981F723F55F140026F198 /* AboutWindowController.swift */,
+				05D26BFF23F7368C006A0D5B /* MainViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -326,10 +332,9 @@
 			};
 			buildConfigurationList = 050B84C41EB93FF90090EA12 /* Build configuration list for PBXProject "Xclean" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -351,6 +356,7 @@
 				055981FB23F55F680026F198 /* AboutWindowController.xib in Resources */,
 				05765B101EBB99D300D2DDDE /* Xclean.icns in Resources */,
 				050B84FA1EB9C90C0090EA12 /* MainMenu.xib in Resources */,
+				05D26C0323F736AC006A0D5B /* MainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05D26C0023F7368C006A0D5B /* MainViewController.swift in Sources */,
 				055981F623F55D3A0026F198 /* ApplicationDelegate.swift in Sources */,
 				055981F823F55F140026F198 /* AboutWindowController.swift in Sources */,
 			);
@@ -399,6 +406,14 @@
 				055981FA23F55F680026F198 /* Base */,
 			);
 			name = AboutWindowController.xib;
+			sourceTree = "<group>";
+		};
+		05D26C0123F736AC006A0D5B /* MainViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05D26C0223F736AC006A0D5B /* Base */,
+			);
+			name = MainViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

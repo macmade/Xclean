@@ -24,37 +24,10 @@
 
 import Cocoa
 
-@NSApplicationMain class ApplicationDelegate: NSObject, NSApplicationDelegate
+public class MainViewController: NSViewController
 {
-    private var statusItem:            NSStatusItem?
-    private var aboutWindowController: AboutWindowController?
-    private var mainViewController:    MainViewController?
-    private var mainWindow:            NSWindow?
-    
-    func applicationDidFinishLaunching( _ notification: Notification )
+    public override var nibName: NSNib.Name?
     {
-        self.statusItem         = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
-        self.mainViewController = MainViewController()
-        self.mainWindow         = NSWindow( contentViewController: self.mainViewController! )
-        
-        self.mainWindow?.makeKeyAndOrderFront( nil )
-    }
-    
-    func applicationWillTerminate( _ notification: Notification )
-    {}
-    
-    @IBAction func showAboutWindow( _ sender: Any? )
-    {
-        if self.aboutWindowController == nil
-        {
-            self.aboutWindowController = AboutWindowController()
-        }
-
-        if self.aboutWindowController?.window?.isVisible == false
-        {
-            self.aboutWindowController?.window?.center()
-        }
-        
-        self.aboutWindowController?.window?.makeKeyAndOrderFront( nil )
+        return "MainViewController"
     }
 }
