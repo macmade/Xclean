@@ -22,23 +22,35 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-import Cocoa
+import Foundation
 
-public class MainViewController: NSViewController
+@objc public class DerivedData: NSObject
 {
-    @IBOutlet private var arrayController: NSArrayController!
+    @objc public dynamic var url:  URL
+    @objc public dynamic var name: String
+    @objc public dynamic var size: UInt64
     
-    public override var nibName: NSNib.Name?
+    public class func allDerivedData() -> [ DerivedData ]
     {
-        return "MainViewController"
+        if let data = DerivedData( url: URL( fileURLWithPath: "/Users/macmade/Desktop" ) )
+        {
+            return [ data, data, data ]
+        }
+        
+        return [  ]
     }
     
-    public override func viewDidLoad()
+    public init?( url: URL )
     {
-        super.viewDidLoad()
+        var isDir = ObjCBool( booleanLiteral: false )
         
-        self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "name", ascending: true ) ]
+        if FileManager.default.fileExists( atPath: url.path, isDirectory: &isDir ) == false || isDir.boolValue == false
+        {
+            return nil
+        }
         
-        self.arrayController.add( contentsOf: DerivedData.allDerivedData() )
+        self.url  = url
+        self.name = "foo"
+        self.size = 0
     }
 }
