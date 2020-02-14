@@ -24,31 +24,10 @@
 
 import Cocoa
 
-@NSApplicationMain class ApplicationDelegate: NSObject, NSApplicationDelegate
+public class AboutWindowController: NSWindowController
 {
-    private var statusItem:            NSStatusItem?
-    private var aboutWindowController: AboutWindowController?
-    
-    func applicationDidFinishLaunching( _ notification: Notification )
+    public override var windowNibName: NSNib.Name?
     {
-        self.statusItem = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
-    }
-    
-    func applicationWillTerminate( _ notification: Notification )
-    {}
-    
-    @IBAction func showAboutWindow( _ sender: Any? )
-    {
-        if self.aboutWindowController == nil
-        {
-            self.aboutWindowController = AboutWindowController()
-        }
-
-        if self.aboutWindowController?.window?.isVisible == false
-        {
-            self.aboutWindowController?.window?.center()
-        }
-        
-        self.aboutWindowController?.window?.makeKeyAndOrderFront( nil )
+        return "AboutWindowController"
     }
 }
