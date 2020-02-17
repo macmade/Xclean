@@ -29,6 +29,7 @@ import Cocoa
     private var statusItem:            NSStatusItem?
     private var aboutWindowController: AboutWindowController?
     private var popover:               NSPopover?
+    private var mainViewController:    MainViewController?
     
     func applicationDidFinishLaunching( _ notification: Notification )
     {
@@ -39,6 +40,7 @@ import Cocoa
         self.popover                        = NSPopover()
         self.popover?.contentViewController = MainViewController()
         self.popover?.behavior              = .transient
+        self.mainViewController             = self.popover?.contentViewController as? MainViewController
         
         let _ = self.popover?.contentViewController?.view
     }
@@ -50,6 +52,7 @@ import Cocoa
     {
         if let button = self.statusItem?.button
         {
+            self.mainViewController?.reload()
             self.popover?.show( relativeTo: NSZeroRect, of: button, preferredEdge: NSRectEdge.minY )
         }
     }

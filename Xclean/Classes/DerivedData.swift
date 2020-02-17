@@ -129,7 +129,7 @@ import Cocoa
         
         DispatchQueue.global( qos: .default ).async
         {
-            let size = DerivedData.getDirectorySize( url: url ) ?? 0
+            let size = FileManager.default.sizeOfDirectory( at: url ) ?? 0
             
             DispatchQueue.main.async
             {
@@ -137,37 +137,5 @@ import Cocoa
                 self.loading = false
             }
         }
-    }
-    
-    private class func getDirectorySize( url: URL ) -> UInt64?
-    {
-        var isDir = ObjCBool( booleanLiteral: false )
-        
-        if FileManager.default.fileExists( atPath: url.path, isDirectory: &isDir ) == false || isDir.boolValue == false
-        {
-            return nil
-        }
-        
-        guard let enumerator = FileManager.default.enumerator( at: url, includingPropertiesForKeys: [ .fileSizeKey ] ) else
-        {
-            return nil
-        }
-        
-        var size: UInt64 = 0
-        
-        for ( _, object ) in enumerator.enumerated()
-        {
-            guard let sub = object as? URL else
-            {
-                continue
-            }
-            
-            if let res = try? sub.resourceValues( forKeys: [ .fileSizeKey ] )
-            {
-                size += UInt64( res.fileSize ?? 0 )
-            }
-        }
-        
-        return size
     }
 }

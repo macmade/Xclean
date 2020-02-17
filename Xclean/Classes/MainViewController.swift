@@ -42,36 +42,44 @@ public class MainViewController: NSViewController, NSMenuDelegate
         super.viewDidLoad()
         
         self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
-        
-        self.arrayController.add( contentsOf: DerivedData.allDerivedData() )
     }
     
-    private func delete( url: URL )
+    public func reload( actionBefore: ( () -> Void )? = nil )
     {
         self.loading = true
         
         DispatchQueue.global( qos: .userInitiated ).async
         {
-            do
-            {
-                try FileManager.default.removeItem( at: url )
-                
-                Thread.sleep( forTimeInterval: 0.5 )
-            }
-            catch let e
-            {
-                DispatchQueue.main.async
-                {
-                    NSAlert( error: e ).runModal()
-                }
-            }
+            actionBefore?()
+            
+            let data = DerivedData.allDerivedData()
             
             DispatchQueue.main.async
             {
                 self.arrayController.remove( contentsOf: self.arrayController.content as? [ Any ] ?? [] )
-                self.arrayController.add( contentsOf: DerivedData.allDerivedData() )
+                self.arrayController.add( contentsOf: data )
+                
+                Thread.sleep( forTimeInterval: 0.5 )
                 
                 self.loading = false
+            }
+        }
+    }
+    
+    private func delete( url: URL )
+    {
+        self.reload
+        {
+            do
+            {
+                try FileManager.default.removeItem( at: url )
+            }
+            catch let e
+            {
+                let _ = DispatchQueue.main.sync
+                {
+                    NSAlert( error: e ).runModal()
+                }
             }
         }
     }

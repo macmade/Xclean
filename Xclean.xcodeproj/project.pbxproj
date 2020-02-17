@@ -18,6 +18,7 @@
 		05D26C0323F736AC006A0D5B /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05D26C0123F736AC006A0D5B /* MainViewController.xib */; };
 		05D26C0523F73AE7006A0D5B /* DerivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D26C0423F73AE6006A0D5B /* DerivedData.swift */; };
 		05D26C0723FA9FB6006A0D5B /* BytesToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D26C0623FA9FB6006A0D5B /* BytesToString.swift */; };
+		05D26C3D23FB2865006A0D5B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D26C3C23FB2865006A0D5B /* FileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		05D26C0223F736AC006A0D5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainViewController.xib; sourceTree = "<group>"; };
 		05D26C0423F73AE6006A0D5B /* DerivedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivedData.swift; sourceTree = "<group>"; };
 		05D26C0623FA9FB6006A0D5B /* BytesToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytesToString.swift; sourceTree = "<group>"; };
+		05D26C3C23FB2865006A0D5B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				05D26BFF23F7368C006A0D5B /* MainViewController.swift */,
 				05D26C0423F73AE6006A0D5B /* DerivedData.swift */,
 				05D26C0623FA9FB6006A0D5B /* BytesToString.swift */,
+				05D26C3C23FB2865006A0D5B /* FileManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				05D26C0023F7368C006A0D5B /* MainViewController.swift in Sources */,
 				05D26C0523F73AE7006A0D5B /* DerivedData.swift in Sources */,
 				055981F623F55D3A0026F198 /* ApplicationDelegate.swift in Sources */,
+				05D26C3D23FB2865006A0D5B /* FileManager.swift in Sources */,
 				05D26C0723FA9FB6006A0D5B /* BytesToString.swift in Sources */,
 				055981F823F55F140026F198 /* AboutWindowController.swift in Sources */,
 			);
