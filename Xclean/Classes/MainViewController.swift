@@ -31,6 +31,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
     @IBOutlet private var mainMenu:        NSMenu!
     
     @objc private dynamic var loading   = false
+    @objc private dynamic var noData    = false
     @objc private dynamic var totalSize = UInt64( 0 )
     
     public override var nibName: NSNib.Name?
@@ -66,8 +67,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
                 self.arrayController.remove( contentsOf: self.arrayController.content as? [ Any ] ?? [] )
                 self.arrayController.add( contentsOf: data )
                 
-                Thread.sleep( forTimeInterval: 0.5 )
-                
+                self.noData    = data.count == 0
                 self.totalSize = size
                 self.loading   = false
             }
@@ -101,7 +101,10 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         if let url = DerivedData.derivedDataURL
         {
-            self.delete( url: url )
+            if FileManager.default.fileExists( atPath: url.path )
+            {
+                self.delete( url: url )
+            }
         }
         else
         {
@@ -113,7 +116,10 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         if let url = DerivedData.moduleCacheURL
         {
-            self.delete( url: url )
+            if FileManager.default.fileExists( atPath: url.path )
+            {
+                self.delete( url: url )
+            }
         }
         else
         {
