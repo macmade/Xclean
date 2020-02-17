@@ -40,7 +40,7 @@ public class MainViewController: NSViewController
     {
         super.viewDidLoad()
         
-        self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "name", ascending: true ) ]
+        self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
         
         self.arrayController.add( contentsOf: DerivedData.allDerivedData() )
     }
