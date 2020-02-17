@@ -76,11 +76,16 @@ import Cocoa
     
     @IBAction func showAboutWindow( _ sender: Any? )
     {
+        if self.popover?.isShown ?? false
+        {
+            self.popover?.close()
+        }
+        
         if self.aboutWindowController == nil
         {
             self.aboutWindowController = AboutWindowController()
         }
-
+        
         if self.aboutWindowController?.window?.isVisible == false
         {
             self.aboutWindowController?.window?.center()

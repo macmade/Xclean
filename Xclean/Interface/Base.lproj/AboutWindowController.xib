@@ -18,14 +18,14 @@
             <rect key="contentRect" x="196" y="240" width="277" height="168"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="277" height="178"/>
+                <rect key="frame" x="0.0" y="0.0" width="317" height="208"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <visualEffectView blendingMode="behindWindow" material="HUDWindow" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="ls5-I3-hMR">
-                        <rect key="frame" x="0.0" y="0.0" width="277" height="178"/>
+                        <rect key="frame" x="0.0" y="0.0" width="317" height="208"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bkJ-Ud-XM8">
-                                <rect key="frame" x="20" y="20" width="128" height="128"/>
+                                <rect key="frame" x="40" y="40" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="CSW-JZ-Wa6"/>
                                     <constraint firstAttribute="height" constant="128" id="kJV-3v-pYD"/>
@@ -33,7 +33,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSApplicationIcon" id="GGX-kf-SmE"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c3B-11-Nnn">
-                                <rect key="frame" x="166" y="101" width="93" height="47"/>
+                                <rect key="frame" x="186" y="121" width="93" height="47"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Mhf-3U-WaO">
                                     <font key="font" metaFont="systemThin" size="40"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -44,7 +44,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yLd-6Z-IaF">
-                                <rect key="frame" x="166" y="70" width="49" height="23"/>
+                                <rect key="frame" x="186" y="90" width="49" height="23"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="GPR-R9-Yud">
                                     <font key="font" metaFont="systemThin" size="20"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -55,7 +55,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qK4-am-2Hl">
-                                <rect key="frame" x="166" y="20" width="36" height="16"/>
+                                <rect key="frame" x="186" y="40" width="36" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="CqC-AJ-UHI">
                                     <font key="font" metaFont="systemThin" size="13"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -69,15 +69,15 @@
                         <constraints>
                             <constraint firstItem="qK4-am-2Hl" firstAttribute="bottom" secondItem="bkJ-Ud-XM8" secondAttribute="bottom" id="4eU-i4-CHR"/>
                             <constraint firstItem="c3B-11-Nnn" firstAttribute="leading" secondItem="bkJ-Ud-XM8" secondAttribute="trailing" constant="20" id="BpG-VA-Nxl"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yLd-6Z-IaF" secondAttribute="trailing" constant="20" id="IQu-ql-HkC"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yLd-6Z-IaF" secondAttribute="trailing" constant="40" id="IQu-ql-HkC"/>
                             <constraint firstItem="qK4-am-2Hl" firstAttribute="leading" secondItem="c3B-11-Nnn" secondAttribute="leading" id="Yot-mk-hra"/>
-                            <constraint firstItem="bkJ-Ud-XM8" firstAttribute="top" secondItem="ls5-I3-hMR" secondAttribute="top" constant="30" id="bpQ-Rd-Kjd"/>
+                            <constraint firstItem="bkJ-Ud-XM8" firstAttribute="top" secondItem="ls5-I3-hMR" secondAttribute="top" constant="40" id="bpQ-Rd-Kjd"/>
                             <constraint firstItem="yLd-6Z-IaF" firstAttribute="top" secondItem="c3B-11-Nnn" secondAttribute="bottom" constant="8" id="cvA-Hq-TDd"/>
-                            <constraint firstItem="bkJ-Ud-XM8" firstAttribute="leading" secondItem="ls5-I3-hMR" secondAttribute="leading" constant="20" id="mLH-C3-hte"/>
-                            <constraint firstAttribute="bottom" secondItem="bkJ-Ud-XM8" secondAttribute="bottom" constant="20" id="nEf-eO-eJA"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c3B-11-Nnn" secondAttribute="trailing" constant="20" id="oqv-O4-gKi"/>
+                            <constraint firstItem="bkJ-Ud-XM8" firstAttribute="leading" secondItem="ls5-I3-hMR" secondAttribute="leading" constant="40" id="mLH-C3-hte"/>
+                            <constraint firstAttribute="bottom" secondItem="bkJ-Ud-XM8" secondAttribute="bottom" constant="40" id="nEf-eO-eJA"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c3B-11-Nnn" secondAttribute="trailing" constant="40" id="oqv-O4-gKi"/>
                             <constraint firstItem="c3B-11-Nnn" firstAttribute="top" secondItem="bkJ-Ud-XM8" secondAttribute="top" id="ryd-fl-aVO"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qK4-am-2Hl" secondAttribute="trailing" constant="20" id="xUl-C7-IqA"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qK4-am-2Hl" secondAttribute="trailing" constant="40" id="xUl-C7-IqA"/>
                             <constraint firstItem="yLd-6Z-IaF" firstAttribute="leading" secondItem="c3B-11-Nnn" secondAttribute="leading" id="zma-HZ-8Vb"/>
                         </constraints>
                     </visualEffectView>
