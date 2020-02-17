@@ -28,20 +28,29 @@ import Cocoa
 {
     private var statusItem:            NSStatusItem?
     private var aboutWindowController: AboutWindowController?
-    private var mainViewController:    MainViewController?
-    private var mainWindow:            NSWindow?
+    private var popover:               NSPopover?
     
     func applicationDidFinishLaunching( _ notification: Notification )
     {
-        self.statusItem         = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
-        self.mainViewController = MainViewController()
-        self.mainWindow         = NSWindow( contentViewController: self.mainViewController! )
-        
-        self.mainWindow?.makeKeyAndOrderFront( nil )
+        self.statusItem                     = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
+        self.statusItem?.button?.target     = self
+        self.statusItem?.button?.action     = #selector( showPopover(_:) )
+        self.statusItem?.button?.image      = NSImage( named: NSImage.applicationIconName )
+        self.popover                        = NSPopover()
+        self.popover?.contentViewController = MainViewController()
+        self.popover?.behavior              = .transient
     }
     
     func applicationWillTerminate( _ notification: Notification )
     {}
+    
+    @IBAction func showPopover( _ sender: Any? )
+    {
+        if let button = self.statusItem?.button
+        {
+            self.popover?.show( relativeTo: NSZeroRect, of: button, preferredEdge: NSRectEdge.minY )
+        }
+    }
     
     @IBAction func showAboutWindow( _ sender: Any? )
     {
