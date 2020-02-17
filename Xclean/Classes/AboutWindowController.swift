@@ -26,8 +26,21 @@ import Cocoa
 
 public class AboutWindowController: NSWindowController
 {
+    @objc private dynamic var name:      String?
+    @objc private dynamic var version:   String?
+    @objc private dynamic var copyright: String?
+    
     public override var windowNibName: NSNib.Name?
     {
         return "AboutWindowController"
+    }
+    
+    override public func windowDidLoad()
+    {
+        super.windowDidLoad()
+        
+        self.name      = Bundle.main.object( forInfoDictionaryKey: "CFBundleName"               ) as? String
+        self.version   = Bundle.main.object( forInfoDictionaryKey: "CFBundleShortVersionString" ) as? String
+        self.copyright = Bundle.main.object( forInfoDictionaryKey: "NSHumanReadableCopyright"   ) as? String
     }
 }
