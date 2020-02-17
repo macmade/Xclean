@@ -78,7 +78,7 @@
                                         <tableColumns>
                                             <tableColumn width="457" minWidth="40" maxWidth="1000" id="7GB-Gf-LER">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                    <font key="font" metaFont="message" size="11"/>
+                                                    <font key="font" metaFont="label" size="11"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                 </tableHeaderCell>
@@ -131,7 +131,7 @@
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="DuA-Ou-jrg">
                                                                 <rect key="frame" x="380" y="13" width="33" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" title="Label" id="qNn-9b-jmT">
-                                                                    <font key="font" metaFont="message" size="11"/>
+                                                                    <font key="font" metaFont="label" size="11"/>
                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -272,6 +272,22 @@
                                 </binding>
                             </connections>
                         </button>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tw5-8v-ei0">
+                            <rect key="frame" x="446" y="322" width="36" height="16"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="UO8-Ic-bWN">
+                                <font key="font" metaFont="systemThin" size="13"/>
+                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="-2" name="hidden" keyPath="self.loading" id="BpZ-rR-xa5"/>
+                                <binding destination="-2" name="value" keyPath="self.totalSize" id="XtF-nl-6Dk">
+                                    <dictionary key="options">
+                                        <string key="NSValueTransformerName">BytesToString</string>
+                                    </dictionary>
+                                </binding>
+                            </connections>
+                        </textField>
                     </subviews>
                     <constraints>
                         <constraint firstItem="0yJ-6i-qvJ" firstAttribute="centerX" secondItem="thh-Zo-gwJ" secondAttribute="centerX" id="7yb-Kv-a5h"/>
@@ -284,13 +300,16 @@
                         <constraint firstItem="sRF-Ne-dXF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Vle-Up-lut" secondAttribute="trailing" constant="20" id="ITh-9n-JfR"/>
                         <constraint firstItem="JDl-X3-5fD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oEj-5V-BbY" secondAttribute="trailing" constant="20" id="KTo-HM-0AY"/>
                         <constraint firstItem="oEj-5V-BbY" firstAttribute="centerY" secondItem="mxv-1X-eMP" secondAttribute="centerY" id="MHy-kS-DGx"/>
+                        <constraint firstAttribute="trailing" secondItem="Tw5-8v-ei0" secondAttribute="trailing" constant="20" id="O6d-UX-qyY"/>
                         <constraint firstItem="T4D-TU-jOG" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="P3J-sk-0SS"/>
+                        <constraint firstItem="Tw5-8v-ei0" firstAttribute="centerY" secondItem="T4D-TU-jOG" secondAttribute="centerY" id="S7n-19-wQT"/>
                         <constraint firstItem="mxv-1X-eMP" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="X1o-W1-409"/>
                         <constraint firstItem="T4D-TU-jOG" firstAttribute="top" secondItem="mxv-1X-eMP" secondAttribute="bottom" constant="20" id="Zic-wb-c30"/>
                         <constraint firstItem="Vle-Up-lut" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="Zql-BC-QDe"/>
                         <constraint firstItem="rtA-RY-bCe" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="ddg-iz-Gmw"/>
                         <constraint firstItem="JDl-X3-5fD" firstAttribute="centerY" secondItem="mxv-1X-eMP" secondAttribute="centerY" id="fcT-Ks-krh"/>
                         <constraint firstItem="oEj-5V-BbY" firstAttribute="leading" secondItem="mxv-1X-eMP" secondAttribute="trailing" constant="10" id="gNN-hU-pkB"/>
+                        <constraint firstItem="Tw5-8v-ei0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="T4D-TU-jOG" secondAttribute="trailing" constant="20" id="hEJ-JJ-OS1"/>
                         <constraint firstItem="rtA-RY-bCe" firstAttribute="top" secondItem="thh-Zo-gwJ" secondAttribute="bottom" id="kHM-H5-BSj"/>
                         <constraint firstAttribute="trailing" secondItem="qFY-e4-fw2" secondAttribute="trailing" constant="20" id="lO3-Gu-HaD"/>
                         <constraint firstItem="qFY-e4-fw2" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="nhm-xM-anW"/>

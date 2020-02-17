@@ -30,7 +30,8 @@ public class MainViewController: NSViewController, NSMenuDelegate
     @IBOutlet private var tableView:       NSTableView!
     @IBOutlet private var mainMenu:        NSMenu!
     
-    @objc private dynamic var loading = false
+    @objc private dynamic var loading   = false
+    @objc private dynamic var totalSize = UInt64( 0 )
     
     public override var nibName: NSNib.Name?
     {
@@ -53,6 +54,12 @@ public class MainViewController: NSViewController, NSMenuDelegate
             actionBefore?()
             
             let data = DerivedData.allDerivedData()
+            var size = UInt64( 0 )
+            
+            if let url = DerivedData.derivedDataURL
+            {
+                size = FileManager.default.sizeOfDirectory( at: url ) ?? 0
+            }
             
             DispatchQueue.main.async
             {
@@ -61,7 +68,8 @@ public class MainViewController: NSViewController, NSMenuDelegate
                 
                 Thread.sleep( forTimeInterval: 0.5 )
                 
-                self.loading = false
+                self.totalSize = size
+                self.loading   = false
             }
         }
     }
