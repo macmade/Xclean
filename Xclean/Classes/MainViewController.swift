@@ -24,9 +24,10 @@
 
 import Cocoa
 
-public class MainViewController: NSViewController
+public class MainViewController: NSViewController, NSMenuDelegate
 {
     @IBOutlet private var arrayController: NSArrayController!
+    @IBOutlet private var tableView:       NSTableView!
     @IBOutlet private var mainMenu:        NSMenu!
     
     @objc private dynamic var loading = false
@@ -80,7 +81,7 @@ public class MainViewController: NSViewController
         self.delete( url: data.url );
     }
     
-    @IBAction func deleteAll( _ sender: Any? )
+    @IBAction private func deleteAll( _ sender: Any? )
     {
         if let url = DerivedData.derivedDataURL
         {
@@ -92,7 +93,7 @@ public class MainViewController: NSViewController
         }
     }
     
-    @IBAction func deleteModuleCache( _ sender: Any? )
+    @IBAction private func deleteModuleCache( _ sender: Any? )
     {
         if let url = DerivedData.moduleCacheURL
         {
@@ -104,7 +105,7 @@ public class MainViewController: NSViewController
         }
     }
     
-    @IBAction func showMenu( _ sender: Any? )
+    @IBAction private func showMenu( _ sender: Any? )
     {
         guard let view = sender as? NSView else
         {
@@ -117,5 +118,66 @@ public class MainViewController: NSViewController
         }
         
         NSMenu.popUpContextMenu( self.mainMenu, with: event, for: view )
+    }
+    
+    @IBAction private func showData( _ sender: Any? )
+    {
+        if let data = ( sender as? NSMenuItem )?.representedObject as? DerivedData
+        {
+            NSWorkspace.shared.selectFile( data.url.path, inFileViewerRootedAtPath: data.url.path )
+        }
+    }
+    
+    @IBAction private func showProject( _ sender: Any? )
+    {
+        if let data = ( sender as? NSMenuItem )?.representedObject as? DerivedData
+        {
+            NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: data.projectPath )
+        }
+        else if let arranged = self.arrayController.arrangedObjects as? [ DerivedData ]
+        {
+            if self.tableView.clickedRow >= 0 && arranged.count > self.tableView.clickedRow
+            {
+                let data = arranged[ self.tableView.clickedRow ]
+                
+                NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: data.projectPath )
+            }
+        }
+    }
+    
+    @IBAction private func openProject( _ sender: Any? )
+    {
+        if let data = ( sender as? NSMenuItem )?.representedObject as? DerivedData
+        {
+            NSWorkspace.shared.open( URL( fileURLWithPath: data.projectPath ) )
+        }
+    }
+    
+    public func menuWillOpen( _ menu: NSMenu )
+    {
+        let disable = { menu.items.forEach { $0.isEnabled = false } }
+        
+        if self.tableView.clickedRow < 0
+        {
+            disable()
+            
+            return
+        }
+        
+        guard let arranged = self.arrayController.arrangedObjects as? [ DerivedData ] else
+        {
+            disable()
+            
+            return
+        }
+        
+        if self.tableView.clickedRow >= arranged.count
+        {
+            disable()
+            
+            return
+        }
+        
+        menu.items.forEach { $0.representedObject = arranged[ self.tableView.clickedRow ] }
     }
 }

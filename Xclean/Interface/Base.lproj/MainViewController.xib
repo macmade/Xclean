@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="arrayController" destination="IE3-7y-uvC" id="JLl-m0-ZiF"/>
                 <outlet property="mainMenu" destination="g1l-mN-z9O" id="zVR-kW-xDZ"/>
+                <outlet property="tableView" destination="h4R-nb-a0T" id="wlR-vm-P35"/>
                 <outlet property="view" destination="c22-O7-iKe" id="6jb-KN-fEM"/>
             </connections>
         </customObject>
@@ -195,6 +196,7 @@
                                             </tableColumn>
                                         </tableColumns>
                                         <connections>
+                                            <action trigger="doubleAction" selector="showProject:" target="-2" id="kp4-PC-gH5"/>
                                             <binding destination="IE3-7y-uvC" name="content" keyPath="arrangedObjects" id="FKH-kY-LdQ"/>
                                             <binding destination="IE3-7y-uvC" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="FKH-kY-LdQ" id="jSs-k7-TKj"/>
                                             <binding destination="IE3-7y-uvC" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="jSs-k7-TKj" id="FrN-wL-lfT"/>
@@ -215,6 +217,7 @@
                             </scroller>
                             <connections>
                                 <binding destination="-2" name="hidden" keyPath="self.loading" id="Ici-sQ-gVm"/>
+                                <outlet property="menu" destination="2sx-7B-nTu" id="CYc-di-j7Z"/>
                             </connections>
                         </scrollView>
                         <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0yJ-6i-qvJ">
@@ -315,6 +318,32 @@
                 </menuItem>
             </items>
             <point key="canvasLocation" x="139" y="-143"/>
+        </menu>
+        <menu id="2sx-7B-nTu">
+            <items>
+                <menuItem title="Open Project" id="OXG-0q-6oo">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="openProject:" target="-2" id="sTv-Qm-Pn0"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show Project in Finder" id="pmQ-jf-xIL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showProject:" target="-2" id="pik-tU-1xc"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show in Finder" id="oGB-wY-fkz">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showData:" target="-2" id="JEd-3f-hf8"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <connections>
+                <outlet property="delegate" destination="-2" id="wJT-az-wLM"/>
+            </connections>
+            <point key="canvasLocation" x="-211" y="152"/>
         </menu>
     </objects>
     <resources>
