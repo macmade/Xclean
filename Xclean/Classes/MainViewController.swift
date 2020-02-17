@@ -27,6 +27,9 @@ import Cocoa
 public class MainViewController: NSViewController
 {
     @IBOutlet private var arrayController: NSArrayController!
+    @IBOutlet private var mainMenu:        NSMenu!
+    
+    @objc private dynamic var loading = false
     
     public override var nibName: NSNib.Name?
     {
@@ -40,5 +43,77 @@ public class MainViewController: NSViewController
         self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "name", ascending: true ) ]
         
         self.arrayController.add( contentsOf: DerivedData.allDerivedData() )
+    }
+    
+    private func delete( url: URL )
+    {
+        self.loading = true
+        
+        DispatchQueue.global( qos: .userInitiated ).async
+        {
+            do
+            {
+                try FileManager.default.removeItem( at: url )
+            }
+            catch let e
+            {
+                DispatchQueue.main.async
+                {
+                    NSAlert( error: e ).runModal()
+                }
+            }
+            
+            DispatchQueue.main.async
+            {
+                self.arrayController.remove( contentsOf: self.arrayController.content as? [ Any ] ?? [] )
+                self.arrayController.add( contentsOf: DerivedData.allDerivedData() )
+                
+                self.loading = false
+            }
+        }
+    }
+    
+    @objc private func deleteData( _ data: DerivedData )
+    {
+        self.delete( url: data.url );
+    }
+    
+    @IBAction func deleteAll( _ sender: Any? )
+    {
+        if let url = DerivedData.derivedDataURL
+        {
+            self.delete( url: url )
+        }
+        else
+        {
+            NSSound.beep()
+        }
+    }
+    
+    @IBAction func deleteModuleCache( _ sender: Any? )
+    {
+        if let url = DerivedData.moduleCacheURL
+        {
+            self.delete( url: url )
+        }
+        else
+        {
+            NSSound.beep()
+        }
+    }
+    
+    @IBAction func showMenu( _ sender: Any? )
+    {
+        guard let view = sender as? NSView else
+        {
+            return
+        }
+        
+        guard let event = NSApp.currentEvent else
+        {
+            return
+        }
+        
+        NSMenu.popUpContextMenu( self.mainMenu, with: event, for: view )
     }
 }

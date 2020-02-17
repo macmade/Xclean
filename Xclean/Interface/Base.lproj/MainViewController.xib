@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController" customModule="Xclean" customModuleProvider="target">
             <connections>
                 <outlet property="arrayController" destination="IE3-7y-uvC" id="JLl-m0-ZiF"/>
+                <outlet property="mainMenu" destination="g1l-mN-z9O" id="zVR-kW-xDZ"/>
                 <outlet property="view" destination="c22-O7-iKe" id="6jb-KN-fEM"/>
             </connections>
         </customObject>
@@ -43,14 +44,17 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="showMenu:" target="-2" id="Zdr-hv-mRS"/>
+                    </connections>
                 </button>
-                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thh-Zo-gwJ">
+                <scrollView autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thh-Zo-gwJ">
                     <rect key="frame" x="20" y="61" width="360" height="251"/>
                     <clipView key="contentView" id="MlP-p2-pjo">
                         <rect key="frame" x="1" y="1" width="358" height="249"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="h4R-nb-a0T">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" id="h4R-nb-a0T">
                                 <rect key="frame" x="0.0" y="0.0" width="358" height="249"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -59,7 +63,7 @@
                                 <tableColumns>
                                     <tableColumn width="355" minWidth="40" maxWidth="1000" id="7GB-Gf-LER">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                            <font key="font" metaFont="controlContent" size="11"/>
+                                            <font key="font" metaFont="menu" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -81,6 +85,9 @@
                                                             <constraint firstAttribute="width" constant="32" id="nwR-0K-QdG"/>
                                                         </constraints>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSFolder" id="onQ-qR-H2n"/>
+                                                        <connections>
+                                                            <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.icon" id="vV8-7T-eXC"/>
+                                                        </connections>
                                                     </imageView>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zKr-D1-FZE">
                                                         <rect key="frame" x="50" y="12" width="37" height="16"/>
@@ -93,16 +100,35 @@
                                                             <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.name" id="lbj-n8-Wkx"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DuA-Ou-jrg">
-                                                        <rect key="frame" x="288" y="13" width="33" height="14"/>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="DuA-Ou-jrg">
+                                                        <rect key="frame" x="278" y="13" width="33" height="14"/>
                                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" title="Label" id="qNn-9b-jmT">
-                                                            <font key="font" metaFont="controlContent" size="11"/>
+                                                            <font key="font" metaFont="menu" size="11"/>
                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="K8j-l3-Ovb" name="hidden" keyPath="objectValue.loading" id="FLG-C7-b1P"/>
+                                                            <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.size" id="zo0-dK-2EI">
+                                                                <dictionary key="options">
+                                                                    <string key="NSValueTransformerName">BytesToString</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
                                                     </textField>
+                                                    <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="T8B-rM-rt0">
+                                                        <rect key="frame" x="293" y="12" width="16" height="16"/>
+                                                        <connections>
+                                                            <binding destination="K8j-l3-Ovb" name="animate" keyPath="objectValue.loading" id="HI4-w8-csZ"/>
+                                                            <binding destination="K8j-l3-Ovb" name="hidden" keyPath="objectValue.loading" id="OG8-44-moR">
+                                                                <dictionary key="options">
+                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
+                                                    </progressIndicator>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="M8X-0f-SP0">
-                                                        <rect key="frame" x="329" y="12" width="16" height="16"/>
+                                                        <rect key="frame" x="319" y="12" width="16" height="16"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="16" id="PIx-Fv-5vS"/>
                                                             <constraint firstAttribute="height" constant="16" id="et3-fh-wY5"/>
@@ -111,13 +137,29 @@
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <binding destination="K8j-l3-Ovb" name="argument" keyPath="objectValue" id="lc3-Z2-qq1">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                                    <string key="NSSelectorName">deleteData:</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                            <binding destination="-2" name="target" keyPath="self" previousBinding="lc3-Z2-qq1" id="ZKp-Hm-kCO">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                                    <string key="NSSelectorName">deleteData:</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="M8X-0f-SP0" firstAttribute="leading" secondItem="T8B-rM-rt0" secondAttribute="trailing" constant="10" id="Amt-Dv-ft7"/>
                                                     <constraint firstAttribute="bottom" secondItem="J2K-Eo-CdX" secondAttribute="bottom" constant="4" id="CCf-XY-kfT"/>
                                                     <constraint firstItem="J2K-Eo-CdX" firstAttribute="leading" secondItem="K8j-l3-Ovb" secondAttribute="leading" constant="10" id="E1d-3k-kEY"/>
-                                                    <constraint firstAttribute="trailing" secondItem="M8X-0f-SP0" secondAttribute="trailing" constant="10" id="G1u-EL-2vg"/>
+                                                    <constraint firstAttribute="trailing" secondItem="M8X-0f-SP0" secondAttribute="trailing" constant="20" id="G1u-EL-2vg"/>
                                                     <constraint firstItem="zKr-D1-FZE" firstAttribute="centerY" secondItem="J2K-Eo-CdX" secondAttribute="centerY" id="NCL-cd-QKB"/>
+                                                    <constraint firstItem="T8B-rM-rt0" firstAttribute="centerY" secondItem="DuA-Ou-jrg" secondAttribute="centerY" id="UCP-rJ-DUr"/>
                                                     <constraint firstAttribute="bottom" secondItem="M8X-0f-SP0" secondAttribute="bottom" constant="12" id="gMu-fx-oOI"/>
                                                     <constraint firstItem="M8X-0f-SP0" firstAttribute="top" secondItem="K8j-l3-Ovb" secondAttribute="top" constant="12" id="kfn-Vd-krb"/>
                                                     <constraint firstItem="zKr-D1-FZE" firstAttribute="leading" secondItem="J2K-Eo-CdX" secondAttribute="trailing" constant="10" id="mnr-bY-3rj"/>
@@ -134,6 +176,8 @@
                                     <binding destination="IE3-7y-uvC" name="content" keyPath="arrangedObjects" id="FKH-kY-LdQ"/>
                                     <binding destination="IE3-7y-uvC" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="FKH-kY-LdQ" id="jSs-k7-TKj"/>
                                     <binding destination="IE3-7y-uvC" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="jSs-k7-TKj" id="FrN-wL-lfT"/>
+                                    <outlet property="dataSource" destination="-2" id="wXJ-Vk-sdc"/>
+                                    <outlet property="delegate" destination="-2" id="PJ7-kz-rNk"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -146,13 +190,35 @@
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="self.loading" id="Ici-sQ-gVm"/>
+                    </connections>
                 </scrollView>
+                <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0yJ-6i-qvJ">
+                    <rect key="frame" x="184" y="171" width="32" height="32"/>
+                    <connections>
+                        <binding destination="-2" name="animate" keyPath="self.loading" id="xgX-kF-4lV"/>
+                        <binding destination="-2" name="hidden" keyPath="self.loading" id="Alo-n4-dYv">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </progressIndicator>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vle-Up-lut">
                     <rect key="frame" x="14" y="13" width="190" height="32"/>
                     <buttonCell key="cell" type="push" title="Delete Module Cache" bezelStyle="rounded" image="NSRefreshFreestandingTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="p7a-ju-VMy">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="deleteModuleCache:" target="-2" id="9PT-kP-VGH"/>
+                        <binding destination="-2" name="enabled" keyPath="self.loading" id="TW1-lb-xfv">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sRF-Ne-dXF">
                     <rect key="frame" x="268" y="13" width="118" height="32"/>
@@ -160,6 +226,14 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="deleteAll:" target="-2" id="fNW-Gm-W1c"/>
+                        <binding destination="-2" name="enabled" keyPath="self.loading" id="TgL-gd-iHf">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
@@ -170,6 +244,7 @@
                 <constraint firstItem="mxv-1X-eMP" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="4uj-7S-VgI"/>
                 <constraint firstItem="thh-Zo-gwJ" firstAttribute="top" secondItem="mxv-1X-eMP" secondAttribute="bottom" constant="20" id="4x5-3o-xrO"/>
                 <constraint firstItem="sRF-Ne-dXF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Vle-Up-lut" secondAttribute="trailing" constant="20" id="7j7-pU-eHu"/>
+                <constraint firstItem="0yJ-6i-qvJ" firstAttribute="centerX" secondItem="thh-Zo-gwJ" secondAttribute="centerX" id="7x6-H2-l19"/>
                 <constraint firstItem="JDl-X3-5fD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oEj-5V-BbY" secondAttribute="trailing" constant="20" id="9th-GE-nt8"/>
                 <constraint firstAttribute="trailing" secondItem="thh-Zo-gwJ" secondAttribute="trailing" constant="20" id="CzI-z4-Xq3"/>
                 <constraint firstAttribute="bottom" secondItem="sRF-Ne-dXF" secondAttribute="bottom" constant="20" id="GkB-hC-3ow"/>
@@ -179,10 +254,28 @@
                 <constraint firstItem="Vle-Up-lut" firstAttribute="top" secondItem="thh-Zo-gwJ" secondAttribute="bottom" constant="20" id="XP1-Uc-Fe1"/>
                 <constraint firstAttribute="trailing" secondItem="JDl-X3-5fD" secondAttribute="trailing" constant="20" id="bZ7-pJ-vsD"/>
                 <constraint firstItem="oEj-5V-BbY" firstAttribute="leading" secondItem="mxv-1X-eMP" secondAttribute="trailing" constant="10" id="jhK-rc-E0J"/>
+                <constraint firstItem="0yJ-6i-qvJ" firstAttribute="centerY" secondItem="thh-Zo-gwJ" secondAttribute="centerY" id="nvW-Ub-UyM"/>
             </constraints>
             <point key="canvasLocation" x="139" y="154"/>
         </customView>
         <arrayController selectsInsertedObjects="NO" avoidsEmptySelection="NO" automaticallyRearrangesObjects="YES" id="IE3-7y-uvC"/>
+        <menu id="g1l-mN-z9O">
+            <items>
+                <menuItem title="About Xclean" id="QER-JE-6Hq">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showAboutWindow:" target="-1" id="mM3-OW-eIO"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Yu3-kt-oXN"/>
+                <menuItem title="Quit" keyEquivalent="q" id="TRW-zx-SRd">
+                    <connections>
+                        <action selector="terminate:" target="-1" id="ct7-vB-i21"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="139" y="-143"/>
+        </menu>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
