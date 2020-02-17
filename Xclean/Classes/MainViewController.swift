@@ -126,6 +126,15 @@ public class MainViewController: NSViewController, NSMenuDelegate
         {
             NSWorkspace.shared.selectFile( data.url.path, inFileViewerRootedAtPath: data.url.path )
         }
+        else if let arranged = self.arrayController.arrangedObjects as? [ DerivedData ]
+        {
+            if self.tableView.clickedRow >= 0 && arranged.count > self.tableView.clickedRow
+            {
+                let data = arranged[ self.tableView.clickedRow ]
+                
+                NSWorkspace.shared.selectFile( data.url.path, inFileViewerRootedAtPath: data.url.path )
+            }
+        }
     }
     
     @IBAction private func showProject( _ sender: Any? )
@@ -150,6 +159,15 @@ public class MainViewController: NSViewController, NSMenuDelegate
         if let data = ( sender as? NSMenuItem )?.representedObject as? DerivedData
         {
             NSWorkspace.shared.open( URL( fileURLWithPath: data.projectPath ) )
+        }
+        else if let arranged = self.arrayController.arrangedObjects as? [ DerivedData ]
+        {
+            if self.tableView.clickedRow >= 0 && arranged.count > self.tableView.clickedRow
+            {
+                let data = arranged[ self.tableView.clickedRow ]
+                
+                NSWorkspace.shared.open( URL( fileURLWithPath: data.projectPath ) )
+            }
         }
     }
     
