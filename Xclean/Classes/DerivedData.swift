@@ -45,11 +45,12 @@ import Cocoa
         return derivedDataURL?.appendingPathComponent( "ModuleCache.noindex" )
     }
     
-    @objc public dynamic var url:     URL
-    @objc public dynamic var name:    String
-    @objc public dynamic var size:    UInt64
-    @objc public dynamic var icon:    NSImage
-    @objc public dynamic var loading: Bool
+    @objc public dynamic var url:         URL
+    @objc public dynamic var projectPath: String
+    @objc public dynamic var name:        String
+    @objc public dynamic var size:        UInt64
+    @objc public dynamic var icon:        NSImage
+    @objc public dynamic var loading:     Bool
      
     
     public class func allDerivedData() -> [ DerivedData ]
@@ -117,11 +118,12 @@ import Cocoa
             return nil
         }
         
-        self.url     = url
-        self.name    = FileManager.default.displayName( atPath: workspace )
-        self.size    = 0
-        self.icon    = NSWorkspace.shared.icon( forFile: workspace )
-        self.loading = true
+        self.url         = url
+        self.projectPath = workspace
+        self.name        = FileManager.default.displayName( atPath: workspace )
+        self.size        = 0
+        self.icon        = NSWorkspace.shared.icon( forFile: workspace )
+        self.loading     = true
         
         super.init()
         
