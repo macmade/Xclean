@@ -372,6 +372,13 @@
                         <action selector="showAboutWindow:" target="-1" id="mM3-OW-eIO"/>
                     </connections>
                 </menuItem>
+                <menuItem isSeparatorItem="YES" id="fJJ-qL-0w1"/>
+                <menuItem title="Start Xclean at Login" id="Jaf-N1-6Ss">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="-3" name="value" keyPath="self.delegate.startAtLogin" id="F0Q-tm-Cpg"/>
+                    </connections>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="Yu3-kt-oXN"/>
                 <menuItem title="Quit" keyEquivalent="q" id="TRW-zx-SRd">
                     <connections>

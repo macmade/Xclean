@@ -20,6 +20,7 @@
 		05D26C0723FA9FB6006A0D5B /* BytesToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D26C0623FA9FB6006A0D5B /* BytesToString.swift */; };
 		05D26C3D23FB2865006A0D5B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D26C3C23FB2865006A0D5B /* FileManager.swift */; };
 		05D26C4123FB58AC006A0D5B /* StatusIconTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 05D26C4023FB58AC006A0D5B /* StatusIconTemplate.pdf */; };
+		05D26C4823FB5C40006A0D5B /* NSApplication+LaunchServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D26C4723FB5C40006A0D5B /* NSApplication+LaunchServices.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,9 @@
 		05D26C0623FA9FB6006A0D5B /* BytesToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytesToString.swift; sourceTree = "<group>"; };
 		05D26C3C23FB2865006A0D5B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		05D26C4023FB58AC006A0D5B /* StatusIconTemplate.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = StatusIconTemplate.pdf; sourceTree = "<group>"; };
+		05D26C4523FB5C3F006A0D5B /* Xclean-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Xclean-Bridging-Header.h"; sourceTree = "<group>"; };
+		05D26C4623FB5C40006A0D5B /* NSApplication+LaunchServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+LaunchServices.h"; sourceTree = "<group>"; };
+		05D26C4723FB5C40006A0D5B /* NSApplication+LaunchServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+LaunchServices.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 		050B84CF1EB93FF90090EA12 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				05D26C4523FB5C3F006A0D5B /* Xclean-Bridging-Header.h */,
 				0599CFDB21419474009930E6 /* Xclean.entitlements */,
 				050B84DA1EB93FF90090EA12 /* Info.plist */,
 			);
@@ -149,12 +154,14 @@
 		050B84E11EB9C8120090EA12 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				055981F523F55D3A0026F198 /* ApplicationDelegate.swift */,
 				055981F723F55F140026F198 /* AboutWindowController.swift */,
-				05D26BFF23F7368C006A0D5B /* MainViewController.swift */,
-				05D26C0423F73AE6006A0D5B /* DerivedData.swift */,
+				055981F523F55D3A0026F198 /* ApplicationDelegate.swift */,
 				05D26C0623FA9FB6006A0D5B /* BytesToString.swift */,
+				05D26C0423F73AE6006A0D5B /* DerivedData.swift */,
 				05D26C3C23FB2865006A0D5B /* FileManager.swift */,
+				05D26BFF23F7368C006A0D5B /* MainViewController.swift */,
+				05D26C4623FB5C40006A0D5B /* NSApplication+LaunchServices.h */,
+				05D26C4723FB5C40006A0D5B /* NSApplication+LaunchServices.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -399,6 +406,7 @@
 				05D26C0023F7368C006A0D5B /* MainViewController.swift in Sources */,
 				05D26C0523F73AE7006A0D5B /* DerivedData.swift in Sources */,
 				055981F623F55D3A0026F198 /* ApplicationDelegate.swift in Sources */,
+				05D26C4823FB5C40006A0D5B /* NSApplication+LaunchServices.m in Sources */,
 				05D26C3D23FB2865006A0D5B /* FileManager.swift in Sources */,
 				05D26C0723FA9FB6006A0D5B /* BytesToString.swift in Sources */,
 				055981F823F55F140026F198 /* AboutWindowController.swift in Sources */,
@@ -464,6 +472,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.Xclean";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Xclean/Xclean-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -482,6 +491,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.Xclean";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Xclean/Xclean-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

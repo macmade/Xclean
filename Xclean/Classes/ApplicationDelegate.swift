@@ -31,16 +31,34 @@ import Cocoa
     private var popover:                NSPopover?
     private var mainViewController:     MainViewController?
     private var popoverTranscientEvent: Any?
+    private var observations:           [ NSKeyValueObservation ] = []
+    
+    @objc public dynamic var startAtLogin: Bool = false
     
     func applicationDidFinishLaunching( _ notification: Notification )
     {
+        self.startAtLogin                   = NSApp.isLoginItemEnabled()
         self.statusItem                     = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
         self.statusItem?.button?.target     = self
         self.statusItem?.button?.action     = #selector( showPopover(_:) )
         self.statusItem?.button?.image      = NSImage( named: "StatusIconTemplate" )
         self.mainViewController             = MainViewController()
         
-        let _ = self.popover?.contentViewController?.view
+        let o = self.observe( \.startAtLogin )
+        {
+            [ weak self ] o, c in guard let self = self else { return }
+            
+            if self.startAtLogin
+            {
+                NSApp.enableLoginItem()
+            }
+            else
+            {
+                NSApp.disableLoginItem()
+            }
+        }
+        
+        self.observations.append( contentsOf: [ o ] )
     }
     
     func applicationWillTerminate( _ notification: Notification )
