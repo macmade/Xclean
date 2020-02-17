@@ -54,6 +54,8 @@ public class MainViewController: NSViewController
             do
             {
                 try FileManager.default.removeItem( at: url )
+                
+                Thread.sleep( forTimeInterval: 0.5 )
             }
             catch let e
             {
