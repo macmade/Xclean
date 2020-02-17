@@ -91,6 +91,7 @@ import Cocoa
             self.aboutWindowController?.window?.center()
         }
         
+        NSApp.activate( ignoringOtherApps: true  )
         self.aboutWindowController?.window?.makeKeyAndOrderFront( nil )
     }
 }
