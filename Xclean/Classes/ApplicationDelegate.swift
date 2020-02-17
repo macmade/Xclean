@@ -26,10 +26,11 @@ import Cocoa
 
 @NSApplicationMain class ApplicationDelegate: NSObject, NSApplicationDelegate
 {
-    private var statusItem:            NSStatusItem?
-    private var aboutWindowController: AboutWindowController?
-    private var popover:               NSPopover?
-    private var mainViewController:    MainViewController?
+    private var statusItem:             NSStatusItem?
+    private var aboutWindowController:  AboutWindowController?
+    private var popover:                NSPopover?
+    private var mainViewController:     MainViewController?
+    private var popoverTranscientEvent: Any?
     
     func applicationDidFinishLaunching( _ notification: Notification )
     {
@@ -37,10 +38,7 @@ import Cocoa
         self.statusItem?.button?.target     = self
         self.statusItem?.button?.action     = #selector( showPopover(_:) )
         self.statusItem?.button?.image      = NSImage( named: NSImage.applicationIconName )
-        self.popover                        = NSPopover()
-        self.popover?.contentViewController = MainViewController()
-        self.popover?.behavior              = .transient
-        self.mainViewController             = self.popover?.contentViewController as? MainViewController
+        self.mainViewController             = MainViewController()
         
         let _ = self.popover?.contentViewController?.view
     }
@@ -50,10 +48,29 @@ import Cocoa
     
     @IBAction func showPopover( _ sender: Any? )
     {
+        guard let controller = self.mainViewController else
+        {
+            return
+        }
+        
+        if self.popover?.isShown ?? false
+        {
+            return
+        }
+        
+        self.popover                        = NSPopover()
+        self.popover?.contentViewController = controller
+        self.popover?.behavior              = .applicationDefined
+        
         if let button = self.statusItem?.button
         {
             self.mainViewController?.reload()
             self.popover?.show( relativeTo: NSZeroRect, of: button, preferredEdge: NSRectEdge.minY )
+        }
+        
+        self.popoverTranscientEvent = NSEvent.addGlobalMonitorForEvents( matching: .leftMouseUp )
+        {
+            _ in self.popover?.close()
         }
     }
     
