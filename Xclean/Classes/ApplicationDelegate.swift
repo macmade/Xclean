@@ -39,6 +39,8 @@ import Cocoa
         self.popover                        = NSPopover()
         self.popover?.contentViewController = MainViewController()
         self.popover?.behavior              = .transient
+        
+        let _ = self.popover?.contentViewController?.view
     }
     
     func applicationWillTerminate( _ notification: Notification )

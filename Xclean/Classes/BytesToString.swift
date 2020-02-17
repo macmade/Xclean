@@ -64,7 +64,7 @@ public class BytesToString: ValueTransformer
             return NSString( format: "%.02f MB", ( Double( bytes.uint64Value ) / 1000.0 ) / 1000.0 )
         }
         
-        return NSString( format: "%.02f MB", ( ( Double( bytes.uint64Value ) / 1000.0 ) / 1000.0 / 1000.0 ) )
+        return NSString( format: "%.02f GB", ( ( Double( bytes.uint64Value ) / 1000.0 ) / 1000.0 / 1000.0 ) )
     }
     
     public override func reverseTransformedValue( _ value: Any? ) -> Any?

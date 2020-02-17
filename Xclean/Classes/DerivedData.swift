@@ -162,21 +162,9 @@ import Cocoa
                 continue
             }
             
-            if FileManager.default.fileExists( atPath: sub.path, isDirectory: &isDir ) == false
+            if let res = try? sub.resourceValues( forKeys: [ .fileSizeKey ] )
             {
-                return nil
-            }
-            
-            if isDir.boolValue
-            {
-                size += DerivedData.getDirectorySize( url: sub ) ?? 0
-            }
-            else
-            {
-                if let res = try? sub.resourceValues( forKeys: [ .fileSizeKey ] )
-                {
-                    size += UInt64( res.fileSize ?? 0 )
-                }
+                size += UInt64( res.fileSize ?? 0 )
             }
         }
         
