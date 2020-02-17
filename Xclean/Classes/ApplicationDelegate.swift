@@ -37,7 +37,7 @@ import Cocoa
         self.statusItem                     = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
         self.statusItem?.button?.target     = self
         self.statusItem?.button?.action     = #selector( showPopover(_:) )
-        self.statusItem?.button?.image      = NSImage( named: NSImage.applicationIconName )
+        self.statusItem?.button?.image      = NSImage( named: "StatusIconTemplate" )
         self.mainViewController             = MainViewController()
         
         let _ = self.popover?.contentViewController?.view

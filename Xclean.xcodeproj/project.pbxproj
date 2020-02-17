@@ -19,6 +19,7 @@
 		05D26C0523F73AE7006A0D5B /* DerivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D26C0423F73AE6006A0D5B /* DerivedData.swift */; };
 		05D26C0723FA9FB6006A0D5B /* BytesToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D26C0623FA9FB6006A0D5B /* BytesToString.swift */; };
 		05D26C3D23FB2865006A0D5B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D26C3C23FB2865006A0D5B /* FileManager.swift */; };
+		05D26C4123FB58AC006A0D5B /* StatusIconTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 05D26C4023FB58AC006A0D5B /* StatusIconTemplate.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		05D26C0423F73AE6006A0D5B /* DerivedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivedData.swift; sourceTree = "<group>"; };
 		05D26C0623FA9FB6006A0D5B /* BytesToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytesToString.swift; sourceTree = "<group>"; };
 		05D26C3C23FB2865006A0D5B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		05D26C4023FB58AC006A0D5B /* StatusIconTemplate.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = StatusIconTemplate.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 		050B84FB1EB9CCD60090EA12 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				05D26C4023FB58AC006A0D5B /* StatusIconTemplate.pdf */,
 				05765B0F1EBB99D300D2DDDE /* Xclean.icns */,
 			);
 			path = Images;
@@ -364,6 +367,7 @@
 			files = (
 				055981FB23F55F680026F198 /* AboutWindowController.xib in Resources */,
 				05765B101EBB99D300D2DDDE /* Xclean.icns in Resources */,
+				05D26C4123FB58AC006A0D5B /* StatusIconTemplate.pdf in Resources */,
 				050B84FA1EB9C90C0090EA12 /* MainMenu.xib in Resources */,
 				05D26C0323F736AC006A0D5B /* MainViewController.xib in Resources */,
 			);
