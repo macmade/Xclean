@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -78,7 +79,7 @@
                                         <tableColumns>
                                             <tableColumn width="457" minWidth="40" maxWidth="1000" id="7GB-Gf-LER">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                    <font key="font" metaFont="menu" size="11"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                 </tableHeaderCell>
@@ -119,7 +120,7 @@
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="tGE-ym-UKi">
                                                                 <rect key="frame" x="50" y="4" width="28" height="11"/>
                                                                 <textFieldCell key="cell" controlSize="mini" lineBreakMode="truncatingHead" title="Label" id="yBs-f9-Jt1">
-                                                                    <font key="font" metaFont="menu" size="9"/>
+                                                                    <font key="font" metaFont="label" size="9"/>
                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -128,10 +129,25 @@
                                                                     <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.projectPath" id="hA6-vI-HfA"/>
                                                                 </connections>
                                                             </textField>
+                                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ayy-P3-A5L">
+                                                                <rect key="frame" x="356" y="12" width="16" height="16"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="16" id="YDf-CL-UIq"/>
+                                                                    <constraint firstAttribute="height" constant="16" id="tDG-fM-0XT"/>
+                                                                </constraints>
+                                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusUnavailable" id="Ma2-P0-DQi"/>
+                                                                <connections>
+                                                                    <binding destination="K8j-l3-Ovb" name="hidden" keyPath="objectValue.zombie" id="00O-jg-9JP">
+                                                                        <dictionary key="options">
+                                                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                        </dictionary>
+                                                                    </binding>
+                                                                </connections>
+                                                            </imageView>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="DuA-Ou-jrg">
                                                                 <rect key="frame" x="380" y="13" width="33" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" title="Label" id="qNn-9b-jmT">
-                                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                                    <font key="font" metaFont="menu" size="11"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -182,6 +198,7 @@
                                                             </button>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="DuA-Ou-jrg" firstAttribute="leading" secondItem="ayy-P3-A5L" secondAttribute="trailing" constant="10" id="2je-wU-yTW"/>
                                                             <constraint firstItem="M8X-0f-SP0" firstAttribute="leading" secondItem="T8B-rM-rt0" secondAttribute="trailing" constant="10" id="Amt-Dv-ft7"/>
                                                             <constraint firstAttribute="bottom" secondItem="J2K-Eo-CdX" secondAttribute="bottom" constant="4" id="CCf-XY-kfT"/>
                                                             <constraint firstItem="J2K-Eo-CdX" firstAttribute="leading" secondItem="K8j-l3-Ovb" secondAttribute="leading" constant="10" id="E1d-3k-kEY"/>
@@ -189,14 +206,15 @@
                                                             <constraint firstItem="tGE-ym-UKi" firstAttribute="bottom" secondItem="J2K-Eo-CdX" secondAttribute="bottom" id="GIa-R5-WBB"/>
                                                             <constraint firstItem="tGE-ym-UKi" firstAttribute="leading" secondItem="zKr-D1-FZE" secondAttribute="leading" id="Ksh-Bt-eSs"/>
                                                             <constraint firstItem="T8B-rM-rt0" firstAttribute="centerY" secondItem="DuA-Ou-jrg" secondAttribute="centerY" id="UCP-rJ-DUr"/>
+                                                            <constraint firstItem="ayy-P3-A5L" firstAttribute="centerY" secondItem="DuA-Ou-jrg" secondAttribute="centerY" id="XpY-J0-1c1"/>
                                                             <constraint firstItem="zKr-D1-FZE" firstAttribute="top" secondItem="J2K-Eo-CdX" secondAttribute="top" id="f45-ao-DYD"/>
                                                             <constraint firstAttribute="bottom" secondItem="M8X-0f-SP0" secondAttribute="bottom" constant="12" id="gMu-fx-oOI"/>
-                                                            <constraint firstItem="DuA-Ou-jrg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tGE-ym-UKi" secondAttribute="trailing" constant="20" id="ijF-CG-pA8"/>
                                                             <constraint firstItem="M8X-0f-SP0" firstAttribute="top" secondItem="K8j-l3-Ovb" secondAttribute="top" constant="12" id="kfn-Vd-krb"/>
                                                             <constraint firstItem="zKr-D1-FZE" firstAttribute="leading" secondItem="J2K-Eo-CdX" secondAttribute="trailing" constant="10" id="mnr-bY-3rj"/>
                                                             <constraint firstItem="M8X-0f-SP0" firstAttribute="leading" secondItem="DuA-Ou-jrg" secondAttribute="trailing" constant="10" id="oYD-YZ-Vov"/>
-                                                            <constraint firstItem="DuA-Ou-jrg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zKr-D1-FZE" secondAttribute="trailing" constant="20" id="s5S-wV-kyt"/>
+                                                            <constraint firstItem="ayy-P3-A5L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zKr-D1-FZE" secondAttribute="trailing" constant="10" id="t6k-Ov-BlK"/>
                                                             <constraint firstItem="J2K-Eo-CdX" firstAttribute="top" secondItem="K8j-l3-Ovb" secondAttribute="top" constant="4" id="vAv-V4-a9P"/>
+                                                            <constraint firstItem="ayy-P3-A5L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tGE-ym-UKi" secondAttribute="trailing" constant="10" id="yov-Ni-30t"/>
                                                             <constraint firstItem="DuA-Ou-jrg" firstAttribute="centerY" secondItem="M8X-0f-SP0" secondAttribute="centerY" id="ztn-BM-qwE"/>
                                                         </constraints>
                                                     </tableCellView>
@@ -427,6 +445,7 @@
         <image name="NSApplicationIcon" width="32" height="32"/>
         <image name="NSFolder" width="32" height="32"/>
         <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
+        <image name="NSStatusUnavailable" width="16" height="16"/>
         <image name="NSStopProgressFreestandingTemplate" width="14" height="14"/>
     </resources>
 </document>

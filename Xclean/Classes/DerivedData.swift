@@ -51,7 +51,7 @@ import Cocoa
     @objc public dynamic var size:        UInt64
     @objc public dynamic var icon:        NSImage
     @objc public dynamic var loading:     Bool
-     
+    @objc public dynamic var zombie:      Bool
     
     public class func allDerivedData() -> [ DerivedData ]
     {
@@ -113,17 +113,13 @@ import Cocoa
             return nil
         }
         
-        if FileManager.default.fileExists( atPath: workspace ) == false
-        {
-            return nil
-        }
-        
         self.url         = url
         self.projectPath = workspace
         self.name        = FileManager.default.displayName( atPath: workspace )
         self.size        = 0
-        self.icon        = NSWorkspace.shared.icon( forFile: workspace )
+        self.icon        = NSWorkspace.shared.icon( forFileType: ( workspace as NSString ).pathExtension )
         self.loading     = true
+        self.zombie      = FileManager.default.fileExists( atPath: workspace ) == false
         
         super.init()
         
