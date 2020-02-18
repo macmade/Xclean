@@ -43,7 +43,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         super.viewDidLoad()
         
-        self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
+        self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "priority", ascending: false ), NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
     }
     
     public func reload( actionBefore: ( () -> Void )? = nil )
@@ -163,7 +163,10 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         if let data = ( sender as? NSMenuItem )?.representedObject as? DerivedData
         {
-            NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: data.projectPath )
+            if data.zombie == false
+            {
+                NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: data.projectPath )
+            }
         }
         else if let arranged = self.arrayController.arrangedObjects as? [ DerivedData ]
         {
@@ -171,7 +174,10 @@ public class MainViewController: NSViewController, NSMenuDelegate
             {
                 let data = arranged[ self.tableView.clickedRow ]
                 
-                NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: data.projectPath )
+                if data.zombie == false
+                {
+                    NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: data.projectPath )
+                }
             }
         }
     }
@@ -180,7 +186,10 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         if let data = ( sender as? NSMenuItem )?.representedObject as? DerivedData
         {
-            NSWorkspace.shared.open( URL( fileURLWithPath: data.projectPath ) )
+            if data.zombie == false
+            {
+                NSWorkspace.shared.open( URL( fileURLWithPath: data.projectPath ) )
+            }
         }
         else if let arranged = self.arrayController.arrangedObjects as? [ DerivedData ]
         {
@@ -188,14 +197,17 @@ public class MainViewController: NSViewController, NSMenuDelegate
             {
                 let data = arranged[ self.tableView.clickedRow ]
                 
-                NSWorkspace.shared.open( URL( fileURLWithPath: data.projectPath ) )
+                if data.zombie == false
+                {
+                    NSWorkspace.shared.open( URL( fileURLWithPath: data.projectPath ) )
+                }
             }
         }
     }
     
     @objc private func validateUserInterfaceItem( _ item: NSValidatedUserInterfaceItem ) -> Bool
     {
-        guard let _ = item as? NSMenuItem else
+        guard let menuItem = item as? NSMenuItem else
         {
             return true
         }
@@ -213,6 +225,18 @@ public class MainViewController: NSViewController, NSMenuDelegate
         if self.tableView.clickedRow >= arranged.count
         {
             return false
+        }
+        
+        if arranged[ self.tableView.clickedRow ].zombie
+        {
+            if menuItem.action == #selector( openProject(_:) )
+            {
+                return false
+            }
+            else if menuItem.action == #selector( showProject(_:) )
+            {
+                return false
+            }
         }
         
         return true

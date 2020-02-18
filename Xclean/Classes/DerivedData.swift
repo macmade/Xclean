@@ -52,6 +52,7 @@ import Cocoa
     @objc public dynamic var icon:        NSImage
     @objc public dynamic var loading:     Bool
     @objc public dynamic var zombie:      Bool
+    @objc public dynamic var priority:    Int
     
     public class func allDerivedData() -> [ DerivedData ]
     {
@@ -120,6 +121,7 @@ import Cocoa
         self.icon        = NSWorkspace.shared.icon( forFileType: ( workspace as NSString ).pathExtension )
         self.loading     = true
         self.zombie      = FileManager.default.fileExists( atPath: workspace ) == false
+        self.priority    = 0
         
         super.init()
         
