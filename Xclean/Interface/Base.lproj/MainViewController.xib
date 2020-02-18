@@ -95,7 +95,7 @@
                                         <tableColumns>
                                             <tableColumn width="457" minWidth="40" maxWidth="1000" id="7GB-Gf-LER">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                    <font key="font" metaFont="label" size="11"/>
+                                                    <font key="font" metaFont="controlContent" size="11"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                 </tableHeaderCell>
@@ -190,7 +190,7 @@
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="DuA-Ou-jrg">
                                                                 <rect key="frame" x="380" y="13" width="33" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" title="Label" id="qNn-9b-jmT">
-                                                                    <font key="font" metaFont="label" size="11"/>
+                                                                    <font key="font" metaFont="controlContent" size="11"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -434,6 +434,12 @@
                         <action selector="checkForUpdates:" target="-1" id="DHT-7H-cCC"/>
                     </connections>
                 </menuItem>
+                <menuItem title="Automatically Check for Updates" id="h1i-kq-0Tk">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="-3" name="value" keyPath="self.delegate.automaticallyCheckForUpdates" id="R3m-gO-Gbi"/>
+                    </connections>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="Yu3-kt-oXN"/>
                 <menuItem title="Quit" keyEquivalent="q" id="TRW-zx-SRd">
                     <connections>
@@ -441,7 +447,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="139" y="-143"/>
+            <point key="canvasLocation" x="578" y="-144"/>
         </menu>
         <menu id="2sx-7B-nTu">
             <items>

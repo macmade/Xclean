@@ -32,24 +32,34 @@ import GitHubUpdates
     private var popover:                NSPopover?
     private var mainViewController:     MainViewController?
     private var popoverTranscientEvent: Any?
+    private var updateCheckTimer:       Timer?
     private var observations:           [ NSKeyValueObservation ] = []
     
-    @objc public dynamic var startAtLogin: Bool = false
+    @objc public dynamic var startAtLogin:                 Bool = false
+    @objc public dynamic var automaticallyCheckForUpdates: Bool = false
     
     @IBOutlet private var updater: GitHubUpdater!
     
+    func applicationWillFinishLaunching( _ notification: Notification )
+    {
+        if UserDefaults.standard.value( forKey: "AutoCheckForUpdates" ) == nil
+        {
+            UserDefaults.standard.set( true, forKey: "AutoCheckForUpdates" )
+        }
+    }
+    
     func applicationDidFinishLaunching( _ notification: Notification )
     {
-        self.startAtLogin                   = NSApp.isLoginItemEnabled()
-        self.statusItem                     = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
-        self.statusItem?.button?.target     = self
-        self.statusItem?.button?.action     = #selector( showPopover(_:) )
-        self.statusItem?.button?.image      = NSImage( named: "StatusIconTemplate" )
-        self.mainViewController             = MainViewController()
+        self.startAtLogin               = NSApp.isLoginItemEnabled()
+        self.statusItem                 = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
+        self.statusItem?.button?.target = self
+        self.statusItem?.button?.action = #selector( showPopover(_:) )
+        self.statusItem?.button?.image  = NSImage( named: "StatusIconTemplate" )
+        self.mainViewController         = MainViewController()
         
         let _ = self.mainViewController?.view
         
-        let o = self.observe( \.startAtLogin )
+        let o1 = self.observe( \.startAtLogin )
         {
             [ weak self ] o, c in guard let self = self else { return }
             
@@ -63,12 +73,37 @@ import GitHubUpdates
             }
         }
         
-        self.observations.append( contentsOf: [ o ] )
-        
-        DispatchQueue.main.asyncAfter( deadline: .now() + .seconds( 5 ) )
+        let o2 = self.observe( \.automaticallyCheckForUpdates )
         {
-            self.updater.checkForUpdatesInBackground()
+            [ weak self ] o, c in guard let self = self else { return }
+            
+            UserDefaults.standard.set( self.automaticallyCheckForUpdates, forKey: "AutoCheckForUpdates" )
+            
+            if self.automaticallyCheckForUpdates
+            {
+                self.updateCheckTimer?.invalidate()
+                
+                self.updateCheckTimer = Timer( timeInterval: 3600, repeats: true )
+                {
+                    _ in self.updater.checkForUpdatesInBackground()
+                }
+                
+                DispatchQueue.main.asyncAfter( deadline: .now() + .seconds( 5 ) )
+                {
+                    self.updater.checkForUpdatesInBackground()
+                }
+            }
+            else
+            {
+                self.updateCheckTimer?.invalidate()
+                
+                self.updateCheckTimer = nil
+            }
         }
+        
+        self.observations.append( contentsOf: [ o1, o2 ] )
+        
+        self.automaticallyCheckForUpdates = UserDefaults.standard.bool( forKey: "AutoCheckForUpdates" )
         
         #if DEBUG
         self.showPopover( nil )
