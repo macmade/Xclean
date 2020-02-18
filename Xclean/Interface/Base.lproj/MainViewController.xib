@@ -61,6 +61,22 @@
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tw5-8v-ei0">
+                            <rect key="frame" x="446" y="342" width="36" height="16"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="UO8-Ic-bWN">
+                                <font key="font" metaFont="systemThin" size="13"/>
+                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="-2" name="hidden" keyPath="self.loading" id="BpZ-rR-xa5"/>
+                                <binding destination="-2" name="value" keyPath="self.totalSize" id="XtF-nl-6Dk">
+                                    <dictionary key="options">
+                                        <string key="NSValueTransformerName">BytesToString</string>
+                                    </dictionary>
+                                </binding>
+                            </connections>
+                        </textField>
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="qFY-e4-fw2">
                             <rect key="frame" x="20" y="329" width="460" height="5"/>
                         </box>
@@ -79,7 +95,7 @@
                                         <tableColumns>
                                             <tableColumn width="457" minWidth="40" maxWidth="1000" id="7GB-Gf-LER">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                    <font key="font" metaFont="message" size="11"/>
+                                                    <font key="font" metaFont="label" size="11"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                 </tableHeaderCell>
@@ -174,7 +190,7 @@
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="DuA-Ou-jrg">
                                                                 <rect key="frame" x="380" y="13" width="33" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" title="Label" id="qNn-9b-jmT">
-                                                                    <font key="font" metaFont="message" size="11"/>
+                                                                    <font key="font" metaFont="label" size="11"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -319,19 +335,19 @@
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="rtA-RY-bCe">
                             <rect key="frame" x="20" y="59" width="460" height="5"/>
                         </box>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vle-Up-lut">
-                            <rect key="frame" x="14" y="13" width="190" height="32"/>
-                            <buttonCell key="cell" type="push" title="Delete Module Cache" bezelStyle="rounded" image="NSRefreshFreestandingTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="p7a-ju-VMy">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <button toolTip="Automatically remove derived data for projects that no longer exist." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qmu-f6-k7l">
+                            <rect key="frame" x="18" y="22" width="140" height="18"/>
+                            <buttonCell key="cell" type="check" title="Automatic Cleaning" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2oE-7m-U2Q">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
-                                <action selector="deleteModuleCache:" target="-2" id="9PT-kP-VGH"/>
-                                <binding destination="-2" name="enabled" keyPath="self.loading" id="TW1-lb-xfv">
+                                <binding destination="-2" name="enabled" keyPath="self.loading" id="zOu-bT-IoD">
                                     <dictionary key="options">
                                         <string key="NSValueTransformerName">NSNegateBoolean</string>
                                     </dictionary>
                                 </binding>
+                                <binding destination="-2" name="value" keyPath="self.autoClean" id="8td-mL-kHE"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sRF-Ne-dXF">
@@ -349,24 +365,10 @@
                                 </binding>
                             </connections>
                         </button>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tw5-8v-ei0">
-                            <rect key="frame" x="446" y="342" width="36" height="16"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="UO8-Ic-bWN">
-                                <font key="font" metaFont="systemThin" size="13"/>
-                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                            <connections>
-                                <binding destination="-2" name="hidden" keyPath="self.loading" id="BpZ-rR-xa5"/>
-                                <binding destination="-2" name="value" keyPath="self.totalSize" id="XtF-nl-6Dk">
-                                    <dictionary key="options">
-                                        <string key="NSValueTransformerName">BytesToString</string>
-                                    </dictionary>
-                                </binding>
-                            </connections>
-                        </textField>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="sRF-Ne-dXF" firstAttribute="top" secondItem="rtA-RY-bCe" secondAttribute="bottom" constant="20" id="57A-mu-6ys"/>
+                        <constraint firstItem="Qmu-f6-k7l" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="7vx-J8-0Yv"/>
                         <constraint firstItem="0yJ-6i-qvJ" firstAttribute="centerX" secondItem="thh-Zo-gwJ" secondAttribute="centerX" id="7yb-Kv-a5h"/>
                         <constraint firstAttribute="bottom" secondItem="sRF-Ne-dXF" secondAttribute="bottom" constant="20" id="B4L-BW-K7M"/>
                         <constraint firstAttribute="trailing" secondItem="JDl-X3-5fD" secondAttribute="trailing" constant="20" id="BRD-3u-Me0"/>
@@ -374,7 +376,6 @@
                         <constraint firstItem="thh-Zo-gwJ" firstAttribute="top" secondItem="qFY-e4-fw2" secondAttribute="bottom" constant="10" id="F0V-xa-GA5"/>
                         <constraint firstItem="thh-Zo-gwJ" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="G20-4K-Jfa"/>
                         <constraint firstItem="mxv-1X-eMP" firstAttribute="top" secondItem="0O2-6A-mBC" secondAttribute="top" constant="20" id="H06-Rj-7Lq"/>
-                        <constraint firstItem="sRF-Ne-dXF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Vle-Up-lut" secondAttribute="trailing" constant="20" id="ITh-9n-JfR"/>
                         <constraint firstItem="JDl-X3-5fD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oEj-5V-BbY" secondAttribute="trailing" constant="20" id="KTo-HM-0AY"/>
                         <constraint firstItem="oEj-5V-BbY" firstAttribute="centerY" secondItem="mxv-1X-eMP" secondAttribute="centerY" constant="-3" id="MHy-kS-DGx"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8vi-aN-MIw" secondAttribute="trailing" constant="20" id="MbE-Bl-btm"/>
@@ -384,22 +385,21 @@
                         <constraint firstItem="Tw5-8v-ei0" firstAttribute="centerY" secondItem="T4D-TU-jOG" secondAttribute="centerY" id="S7n-19-wQT"/>
                         <constraint firstItem="mxv-1X-eMP" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="X1o-W1-409"/>
                         <constraint firstItem="T4D-TU-jOG" firstAttribute="top" secondItem="mxv-1X-eMP" secondAttribute="bottom" constant="20" id="Zic-wb-c30"/>
-                        <constraint firstItem="Vle-Up-lut" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="Zql-BC-QDe"/>
                         <constraint firstItem="8vi-aN-MIw" firstAttribute="centerX" secondItem="thh-Zo-gwJ" secondAttribute="centerX" id="bR2-Qh-uir"/>
                         <constraint firstItem="8vi-aN-MIw" firstAttribute="centerY" secondItem="thh-Zo-gwJ" secondAttribute="centerY" id="cdo-ac-gEy"/>
                         <constraint firstItem="rtA-RY-bCe" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="ddg-iz-Gmw"/>
+                        <constraint firstItem="sRF-Ne-dXF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qmu-f6-k7l" secondAttribute="trailing" constant="20" id="dgi-gb-Qmo"/>
                         <constraint firstItem="JDl-X3-5fD" firstAttribute="centerY" secondItem="mxv-1X-eMP" secondAttribute="centerY" id="fcT-Ks-krh"/>
                         <constraint firstItem="oEj-5V-BbY" firstAttribute="leading" secondItem="mxv-1X-eMP" secondAttribute="trailing" constant="20" id="gNN-hU-pkB"/>
                         <constraint firstItem="Tw5-8v-ei0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="T4D-TU-jOG" secondAttribute="trailing" constant="20" id="hEJ-JJ-OS1"/>
+                        <constraint firstItem="Qmu-f6-k7l" firstAttribute="centerY" secondItem="sRF-Ne-dXF" secondAttribute="centerY" id="jR6-db-a04"/>
                         <constraint firstItem="rtA-RY-bCe" firstAttribute="top" secondItem="thh-Zo-gwJ" secondAttribute="bottom" constant="10" id="kHM-H5-BSj"/>
                         <constraint firstAttribute="trailing" secondItem="qFY-e4-fw2" secondAttribute="trailing" constant="20" id="lO3-Gu-HaD"/>
                         <constraint firstItem="qFY-e4-fw2" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="nhm-xM-anW"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="T4D-TU-jOG" secondAttribute="trailing" constant="20" id="pDG-PR-qol"/>
                         <constraint firstAttribute="trailing" secondItem="thh-Zo-gwJ" secondAttribute="trailing" constant="20" id="pFK-u9-dak"/>
-                        <constraint firstAttribute="bottom" secondItem="Vle-Up-lut" secondAttribute="bottom" constant="20" id="pN1-x6-hsG"/>
                         <constraint firstItem="0yJ-6i-qvJ" firstAttribute="centerY" secondItem="thh-Zo-gwJ" secondAttribute="centerY" id="psT-5D-XtP"/>
                         <constraint firstAttribute="trailing" secondItem="rtA-RY-bCe" secondAttribute="trailing" constant="20" id="w2b-My-yW7"/>
-                        <constraint firstItem="Vle-Up-lut" firstAttribute="top" secondItem="rtA-RY-bCe" secondAttribute="bottom" constant="20" id="x7e-0e-AG3"/>
                         <constraint firstItem="qFY-e4-fw2" firstAttribute="top" secondItem="T4D-TU-jOG" secondAttribute="bottom" constant="10" id="xYv-zs-8tP"/>
                     </constraints>
                 </visualEffectView>
@@ -475,7 +475,6 @@
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSApplicationIcon" width="32" height="32"/>
         <image name="NSFolder" width="32" height="32"/>
-        <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
         <image name="NSStatusUnavailable" width="16" height="16"/>
         <image name="NSStopProgressFreestandingTemplate" width="14" height="14"/>
     </resources>

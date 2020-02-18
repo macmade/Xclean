@@ -30,9 +30,15 @@ public class MainViewController: NSViewController, NSMenuDelegate
     @IBOutlet private var tableView:       NSTableView!
     @IBOutlet private var mainMenu:        NSMenu!
     
+    @objc private dynamic var autoClean = false
     @objc private dynamic var loading   = false
     @objc private dynamic var noData    = false
     @objc private dynamic var totalSize = UInt64( 0 )
+    
+    private var loadedOnce:   Bool                      = false
+    private var observations: [ NSKeyValueObservation ] = []
+    private var cleanLock:    NSLock                    = NSLock()
+    private var timer:        Timer?
     
     public override var nibName: NSNib.Name?
     {
@@ -44,6 +50,50 @@ public class MainViewController: NSViewController, NSMenuDelegate
         super.viewDidLoad()
         
         self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "priority", ascending: false ), NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
+        self.autoClean                       = UserDefaults.standard.bool( forKey: "AutoClean" )
+        self.timer                           = Timer( timeInterval: 600, repeats: true ) { [ weak self ] _ in self?.cleanZombies() }
+        
+        let o = self.observe( \.autoClean )
+        {
+            [ weak self ] o, c in guard let self = self else { return }
+            
+            UserDefaults.standard.set( self.autoClean, forKey: "AutoClean" )
+            self.cleanZombies()
+        }
+        
+        self.observations.append( contentsOf: [ o ] )
+    }
+    
+    private func cleanZombies()
+    {
+        if self.autoClean == false
+        {
+            return
+        }
+        
+        guard let all = self.arrayController.content as? [ DerivedData ] else
+        {
+            return
+        }
+        
+        let zombies = all.filter { $0.zombie }
+        
+        self.arrayController.remove( contentsOf: zombies )
+        
+        DispatchQueue.global( qos: .background ).async
+        {
+            if self.cleanLock.try() == false
+            {
+                return
+            }
+            
+            defer { self.cleanLock.unlock() }
+            
+            for zombie in zombies
+            {
+                try? FileManager.default.removeItem( at: zombie.url )
+            }
+        }
     }
     
     public func reload( actionBefore: ( () -> Void )? = nil )
@@ -70,6 +120,13 @@ public class MainViewController: NSViewController, NSMenuDelegate
                 self.noData    = data.count == 0
                 self.totalSize = size
                 self.loading   = false
+                
+                if( self.loadedOnce == false )
+                {
+                    self.loadedOnce = true
+                    
+                    self.cleanZombies()
+                }
             }
         }
     }

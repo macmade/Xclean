@@ -47,6 +47,8 @@ import GitHubUpdates
         self.statusItem?.button?.image      = NSImage( named: "StatusIconTemplate" )
         self.mainViewController             = MainViewController()
         
+        let _ = self.mainViewController?.view
+        
         let o = self.observe( \.startAtLogin )
         {
             [ weak self ] o, c in guard let self = self else { return }
