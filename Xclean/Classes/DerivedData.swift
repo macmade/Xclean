@@ -46,7 +46,7 @@ import Cocoa
     }
     
     @objc public dynamic var url:         URL
-    @objc public dynamic var projectPath: String
+    @objc public dynamic var projectPath: String?
     @objc public dynamic var name:        String
     @objc public dynamic var size:        UInt64
     @objc public dynamic var icon:        NSImage
@@ -97,31 +97,45 @@ import Cocoa
             return nil
         }
         
-        let plist = ( url.path as NSString ).appendingPathComponent( "info.plist" )
-        
-        guard let data = try? Data( contentsOf: URL( fileURLWithPath: plist ) ) else
+        if url.lastPathComponent == "ModuleCache.noindex"
         {
-            return nil
+            self.url         = url
+            self.projectPath = nil
+            self.name        = url.lastPathComponent
+            self.size        = 0
+            self.icon        = NSWorkspace.shared.icon( forFileType: "dylib" )
+            self.loading     = true
+            self.zombie      = false
+            self.priority    = 10
         }
-        
-        guard let info = try? PropertyListSerialization.propertyList( from: data, options: [], format: nil ) as? [ String : Any ] else
+        else
         {
-            return nil
+            let plist = ( url.path as NSString ).appendingPathComponent( "info.plist" )
+            
+            guard let data = try? Data( contentsOf: URL( fileURLWithPath: plist ) ) else
+            {
+                return nil
+            }
+            
+            guard let info = try? PropertyListSerialization.propertyList( from: data, options: [], format: nil ) as? [ String : Any ] else
+            {
+                return nil
+            }
+            
+            guard let workspace = info[ "WorkspacePath" ] as? String else
+            {
+                return nil
+            }
+            
+            self.url         = url
+            self.projectPath = workspace
+            self.name        = FileManager.default.displayName( atPath: workspace )
+            self.size        = 0
+            self.icon        = NSWorkspace.shared.icon( forFileType: ( workspace as NSString ).pathExtension )
+            self.loading     = true
+            self.zombie      = FileManager.default.fileExists( atPath: workspace ) == false
+            self.priority    = 0
         }
-        
-        guard let workspace = info[ "WorkspacePath" ] as? String else
-        {
-            return nil
-        }
-        
-        self.url         = url
-        self.projectPath = workspace
-        self.name        = FileManager.default.displayName( atPath: workspace )
-        self.size        = 0
-        self.icon        = NSWorkspace.shared.icon( forFileType: ( workspace as NSString ).pathExtension )
-        self.loading     = true
-        self.zombie      = FileManager.default.fileExists( atPath: workspace ) == false
-        self.priority    = 0
         
         super.init()
         

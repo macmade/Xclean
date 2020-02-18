@@ -113,8 +113,30 @@
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                                 <connections>
+                                                                    <binding destination="K8j-l3-Ovb" name="hidden" keyPath="objectValue.projectPath" id="kbQ-Zj-rDT">
+                                                                        <dictionary key="options">
+                                                                            <string key="NSValueTransformerName">NSIsNil</string>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.name" id="e7d-ur-gdm"/>
                                                                     <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.name" id="lbj-n8-Wkx"/>
+                                                                </connections>
+                                                            </textField>
+                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vgi-zg-TJQ">
+                                                                <rect key="frame" x="50" y="12" width="37" height="16"/>
+                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Label" id="h7R-CM-hse">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <connections>
+                                                                    <binding destination="K8j-l3-Ovb" name="hidden" keyPath="objectValue.projectPath" id="vrh-QN-NUD">
+                                                                        <dictionary key="options">
+                                                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                                        </dictionary>
+                                                                    </binding>
+                                                                    <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.name" id="q8e-UH-RSD"/>
+                                                                    <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.name" id="D5i-Df-O4y"/>
                                                                 </connections>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="tGE-ym-UKi">
@@ -125,6 +147,11 @@
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                                 <connections>
+                                                                    <binding destination="K8j-l3-Ovb" name="hidden" keyPath="objectValue.projectPath" id="4QR-EF-obj">
+                                                                        <dictionary key="options">
+                                                                            <string key="NSValueTransformerName">NSIsNil</string>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.projectPath" id="eVA-Od-dsy"/>
                                                                     <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.projectPath" id="hA6-vI-HfA"/>
                                                                 </connections>
@@ -206,11 +233,14 @@
                                                             <constraint firstAttribute="trailing" secondItem="M8X-0f-SP0" secondAttribute="trailing" constant="20" id="G1u-EL-2vg"/>
                                                             <constraint firstItem="tGE-ym-UKi" firstAttribute="bottom" secondItem="J2K-Eo-CdX" secondAttribute="bottom" id="GIa-R5-WBB"/>
                                                             <constraint firstItem="tGE-ym-UKi" firstAttribute="leading" secondItem="zKr-D1-FZE" secondAttribute="leading" id="Ksh-Bt-eSs"/>
+                                                            <constraint firstItem="vgi-zg-TJQ" firstAttribute="leading" secondItem="zKr-D1-FZE" secondAttribute="leading" id="M7f-ai-Ck2"/>
+                                                            <constraint firstItem="vgi-zg-TJQ" firstAttribute="centerY" secondItem="J2K-Eo-CdX" secondAttribute="centerY" id="QXs-1M-pcx"/>
                                                             <constraint firstItem="T8B-rM-rt0" firstAttribute="centerY" secondItem="DuA-Ou-jrg" secondAttribute="centerY" id="UCP-rJ-DUr"/>
                                                             <constraint firstItem="ayy-P3-A5L" firstAttribute="centerY" secondItem="DuA-Ou-jrg" secondAttribute="centerY" id="XpY-J0-1c1"/>
                                                             <constraint firstItem="zKr-D1-FZE" firstAttribute="top" secondItem="J2K-Eo-CdX" secondAttribute="top" id="f45-ao-DYD"/>
                                                             <constraint firstAttribute="bottom" secondItem="M8X-0f-SP0" secondAttribute="bottom" constant="12" id="gMu-fx-oOI"/>
                                                             <constraint firstItem="M8X-0f-SP0" firstAttribute="top" secondItem="K8j-l3-Ovb" secondAttribute="top" constant="12" id="kfn-Vd-krb"/>
+                                                            <constraint firstItem="ayy-P3-A5L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vgi-zg-TJQ" secondAttribute="trailing" constant="10" id="mG4-b5-gz0"/>
                                                             <constraint firstItem="zKr-D1-FZE" firstAttribute="leading" secondItem="J2K-Eo-CdX" secondAttribute="trailing" constant="10" id="mnr-bY-3rj"/>
                                                             <constraint firstItem="M8X-0f-SP0" firstAttribute="leading" secondItem="DuA-Ou-jrg" secondAttribute="trailing" constant="10" id="oYD-YZ-Vov"/>
                                                             <constraint firstItem="ayy-P3-A5L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zKr-D1-FZE" secondAttribute="trailing" constant="10" id="t6k-Ov-BlK"/>

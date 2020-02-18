@@ -163,9 +163,9 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         if let data = ( sender as? NSMenuItem )?.representedObject as? DerivedData
         {
-            if data.zombie == false
+            if data.zombie == false, let path = data.projectPath
             {
-                NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: data.projectPath )
+                NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: path )
             }
         }
         else if let arranged = self.arrayController.arrangedObjects as? [ DerivedData ]
@@ -174,9 +174,9 @@ public class MainViewController: NSViewController, NSMenuDelegate
             {
                 let data = arranged[ self.tableView.clickedRow ]
                 
-                if data.zombie == false
+                if data.zombie == false, let path = data.projectPath
                 {
-                    NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: data.projectPath )
+                    NSWorkspace.shared.selectFile( data.projectPath, inFileViewerRootedAtPath: path )
                 }
             }
         }
@@ -186,9 +186,9 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         if let data = ( sender as? NSMenuItem )?.representedObject as? DerivedData
         {
-            if data.zombie == false
+            if data.zombie == false, let path = data.projectPath
             {
-                NSWorkspace.shared.open( URL( fileURLWithPath: data.projectPath ) )
+                NSWorkspace.shared.open( URL( fileURLWithPath: path ) )
             }
         }
         else if let arranged = self.arrayController.arrangedObjects as? [ DerivedData ]
@@ -197,9 +197,9 @@ public class MainViewController: NSViewController, NSMenuDelegate
             {
                 let data = arranged[ self.tableView.clickedRow ]
                 
-                if data.zombie == false
+                if data.zombie == false, let path = data.projectPath
                 {
-                    NSWorkspace.shared.open( URL( fileURLWithPath: data.projectPath ) )
+                    NSWorkspace.shared.open( URL( fileURLWithPath: path ) )
                 }
             }
         }
@@ -227,7 +227,9 @@ public class MainViewController: NSViewController, NSMenuDelegate
             return false
         }
         
-        if arranged[ self.tableView.clickedRow ].zombie
+        let data = arranged[ self.tableView.clickedRow ]
+        
+        if data.zombie || data.name == "ModuleCache.noindex"
         {
             if menuItem.action == #selector( openProject(_:) )
             {
