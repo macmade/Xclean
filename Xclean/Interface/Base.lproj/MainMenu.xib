@@ -674,6 +674,16 @@
             </items>
             <point key="canvasLocation" x="139" y="154"/>
         </menu>
-        <customObject id="IVe-8l-q0O" customClass="ApplicationDelegate" customModule="Xclean" customModuleProvider="target"/>
+        <customObject id="IVe-8l-q0O" customClass="ApplicationDelegate" customModule="Xclean" customModuleProvider="target">
+            <connections>
+                <outlet property="updater" destination="fzg-LW-yam" id="QPM-9b-ddG"/>
+            </connections>
+        </customObject>
+        <customObject id="fzg-LW-yam" customClass="GitHubUpdater">
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="string" keyPath="user" value="macmade"/>
+                <userDefinedRuntimeAttribute type="string" keyPath="repository" value="Xclean"/>
+            </userDefinedRuntimeAttributes>
+        </customObject>
     </objects>
 </document>

@@ -23,6 +23,7 @@
  ******************************************************************************/
 
 import Cocoa
+import GitHubUpdates
 
 @NSApplicationMain class ApplicationDelegate: NSObject, NSApplicationDelegate
 {
@@ -34,6 +35,8 @@ import Cocoa
     private var observations:           [ NSKeyValueObservation ] = []
     
     @objc public dynamic var startAtLogin: Bool = false
+    
+    @IBOutlet private var updater: GitHubUpdater!
     
     func applicationDidFinishLaunching( _ notification: Notification )
     {
@@ -59,6 +62,11 @@ import Cocoa
         }
         
         self.observations.append( contentsOf: [ o ] )
+        
+        DispatchQueue.main.asyncAfter( deadline: .now() + .seconds( 5 ) )
+        {
+            self.updater.checkForUpdatesInBackground()
+        }
     }
     
     func applicationWillTerminate( _ notification: Notification )
@@ -116,5 +124,16 @@ import Cocoa
         
         NSApp.activate( ignoringOtherApps: true  )
         self.aboutWindowController?.window?.makeKeyAndOrderFront( nil )
+    }
+    
+    @IBAction public func checkForUpdates( _ sender: Any? )
+    {
+        if self.popover?.isShown ?? false
+        {
+            self.popover?.close()
+        }
+        
+        NSApp.activate( ignoringOtherApps: true  )
+        self.updater.checkForUpdates( sender )
     }
 }
