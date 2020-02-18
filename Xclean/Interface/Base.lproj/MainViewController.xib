@@ -129,13 +129,13 @@
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                                 <connections>
+                                                                    <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.name" id="e7d-ur-gdm"/>
+                                                                    <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.name" id="lbj-n8-Wkx"/>
                                                                     <binding destination="K8j-l3-Ovb" name="hidden" keyPath="objectValue.projectPath" id="kbQ-Zj-rDT">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">NSIsNil</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.name" id="e7d-ur-gdm"/>
-                                                                    <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.name" id="lbj-n8-Wkx"/>
                                                                 </connections>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vgi-zg-TJQ">
@@ -146,13 +146,13 @@
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                                 <connections>
+                                                                    <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.name" id="D5i-Df-O4y"/>
+                                                                    <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.name" id="q8e-UH-RSD"/>
                                                                     <binding destination="K8j-l3-Ovb" name="hidden" keyPath="objectValue.projectPath" id="vrh-QN-NUD">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">NSIsNotNil</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.name" id="q8e-UH-RSD"/>
-                                                                    <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.name" id="D5i-Df-O4y"/>
                                                                 </connections>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="tGE-ym-UKi">
@@ -172,7 +172,7 @@
                                                                     <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.projectPath" id="hA6-vI-HfA"/>
                                                                 </connections>
                                                             </textField>
-                                                            <imageView toolTip="Project no longer exists" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ayy-P3-A5L">
+                                                            <imageView toolTip="This project no longer exists." horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ayy-P3-A5L">
                                                                 <rect key="frame" x="356" y="12" width="16" height="16"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="16" id="YDf-CL-UIq"/>
@@ -342,12 +342,12 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
+                                <binding destination="-2" name="value" keyPath="self.autoClean" id="8td-mL-kHE"/>
                                 <binding destination="-2" name="enabled" keyPath="self.loading" id="zOu-bT-IoD">
                                     <dictionary key="options">
                                         <string key="NSValueTransformerName">NSNegateBoolean</string>
                                     </dictionary>
                                 </binding>
-                                <binding destination="-2" name="value" keyPath="self.autoClean" id="8td-mL-kHE"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sRF-Ne-dXF">
