@@ -67,6 +67,10 @@ import GitHubUpdates
         {
             self.updater.checkForUpdatesInBackground()
         }
+        
+        #if DEBUG
+        self.showPopover( nil )
+        #endif
     }
     
     func applicationWillTerminate( _ notification: Notification )
