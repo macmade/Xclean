@@ -422,12 +422,6 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="fJJ-qL-0w1"/>
-                <menuItem title="Start Xclean at Login" id="Jaf-N1-6Ss">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <binding destination="-3" name="value" keyPath="self.delegate.startAtLogin" id="F0Q-tm-Cpg"/>
-                    </connections>
-                </menuItem>
                 <menuItem title="Check for Updates..." id="1Zg-m9-3fg">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -438,6 +432,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <binding destination="-3" name="value" keyPath="self.delegate.automaticallyCheckForUpdates" id="R3m-gO-Gbi"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Start Xclean at Login" id="Jaf-N1-6Ss">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="-3" name="value" keyPath="self.delegate.startAtLogin" id="F0Q-tm-Cpg"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Yu3-kt-oXN"/>
