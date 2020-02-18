@@ -12,7 +12,10 @@ Xclean
 
 ### About
 
-...
+**Xclean** is a macOS menu bar app that provides a convenient way to clear Xcode's derived data or module cache.
+
+![Xclean](Assets/Xclean.png "Xclean")
+
 
 License
 -------
