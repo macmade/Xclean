@@ -78,7 +78,7 @@
                                         <tableColumns>
                                             <tableColumn width="457" minWidth="40" maxWidth="1000" id="7GB-Gf-LER">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                    <font key="font" metaFont="menu" size="11"/>
+                                                    <font key="font" metaFont="controlContent" size="11"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                 </tableHeaderCell>
@@ -131,7 +131,7 @@
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="DuA-Ou-jrg">
                                                                 <rect key="frame" x="380" y="13" width="33" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" title="Label" id="qNn-9b-jmT">
-                                                                    <font key="font" metaFont="menu" size="11"/>
+                                                                    <font key="font" metaFont="controlContent" size="11"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -210,6 +210,7 @@
                                             <binding destination="IE3-7y-uvC" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="jSs-k7-TKj" id="FrN-wL-lfT"/>
                                             <outlet property="dataSource" destination="-2" id="wXJ-Vk-sdc"/>
                                             <outlet property="delegate" destination="-2" id="PJ7-kz-rNk"/>
+                                            <outlet property="menu" destination="2sx-7B-nTu" id="J96-12-8hs"/>
                                         </connections>
                                     </tableView>
                                 </subviews>
@@ -233,7 +234,6 @@
                                         <integer key="NSNullPlaceholder" value="-1"/>
                                     </dictionary>
                                 </binding>
-                                <outlet property="menu" destination="2sx-7B-nTu" id="CYc-di-j7Z"/>
                             </connections>
                         </scrollView>
                         <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0yJ-6i-qvJ">

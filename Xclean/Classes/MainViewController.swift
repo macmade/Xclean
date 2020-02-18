@@ -193,28 +193,45 @@ public class MainViewController: NSViewController, NSMenuDelegate
         }
     }
     
-    public func menuWillOpen( _ menu: NSMenu )
+    @objc private func validateUserInterfaceItem( _ item: NSValidatedUserInterfaceItem ) -> Bool
     {
-        let disable = { menu.items.forEach { $0.isEnabled = false } }
+        guard let _ = item as? NSMenuItem else
+        {
+            return true
+        }
         
         if self.tableView.clickedRow < 0
         {
-            disable()
-            
+            return false
+        }
+        
+        guard let arranged = self.arrayController.arrangedObjects as? [ DerivedData ] else
+        {
+            return false
+        }
+        
+        if self.tableView.clickedRow >= arranged.count
+        {
+            return false
+        }
+        
+        return true
+    }
+    
+    public func menuWillOpen( _ menu: NSMenu )
+    {
+        if self.tableView.clickedRow < 0
+        {
             return
         }
         
         guard let arranged = self.arrayController.arrangedObjects as? [ DerivedData ] else
         {
-            disable()
-            
             return
         }
         
         if self.tableView.clickedRow >= arranged.count
         {
-            disable()
-            
             return
         }
         
