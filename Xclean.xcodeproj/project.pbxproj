@@ -114,7 +114,6 @@
 		05C83DC52141797C00A9ED6D /* C++.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "C++.xcconfig"; sourceTree = "<group>"; };
 		05C83DC62141797C00A9ED6D /* All-Languages.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "All-Languages.xcconfig"; sourceTree = "<group>"; };
 		05C83DC72141797C00A9ED6D /* Preprocessing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Preprocessing.xcconfig; sourceTree = "<group>"; };
-		05C83DC82141797C00A9ED6D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		05C83DCA2141797C00A9ED6D /* ccache-config.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "ccache-config.sh"; sourceTree = "<group>"; };
 		05C83DCB2141797C00A9ED6D /* ccache.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ccache.sh; sourceTree = "<group>"; };
 		05D26BFF23F7368C006A0D5B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -254,7 +253,6 @@
 				05C83D9F2141797C00A9ED6D /* Release.xcconfig */,
 				05C83DA02141797C00A9ED6D /* README.md */,
 				05C83DA12141797C00A9ED6D /* Common */,
-				05C83DC82141797C00A9ED6D /* .gitignore */,
 				05C83DC92141797C00A9ED6D /* Scripts */,
 			);
 			name = xcconfig;
