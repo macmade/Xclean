@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="500" height="446"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <visualEffectView blendingMode="behindWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="0O2-6A-mBC">
+                <visualEffectView blendingMode="behindWindow" material="popover" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="0O2-6A-mBC">
                     <rect key="frame" x="0.0" y="0.0" width="500" height="446"/>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mxv-1X-eMP">
@@ -78,7 +78,7 @@
                                         <tableColumns>
                                             <tableColumn width="457" minWidth="40" maxWidth="1000" id="7GB-Gf-LER">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                    <font key="font" metaFont="toolTip"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                 </tableHeaderCell>
@@ -112,8 +112,8 @@
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                                 <connections>
-                                                                    <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.name" id="lbj-n8-Wkx"/>
                                                                     <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.name" id="e7d-ur-gdm"/>
+                                                                    <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.name" id="lbj-n8-Wkx"/>
                                                                 </connections>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="tGE-ym-UKi">
@@ -124,14 +124,14 @@
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                                 <connections>
-                                                                    <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.projectPath" id="hA6-vI-HfA"/>
                                                                     <binding destination="K8j-l3-Ovb" name="value" keyPath="objectValue.projectPath" id="eVA-Od-dsy"/>
+                                                                    <binding destination="K8j-l3-Ovb" name="toolTip" keyPath="objectValue.projectPath" id="hA6-vI-HfA"/>
                                                                 </connections>
                                                             </textField>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="DuA-Ou-jrg">
                                                                 <rect key="frame" x="380" y="13" width="33" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" title="Label" id="qNn-9b-jmT">
-                                                                    <font key="font" metaFont="controlContent" size="11"/>
+                                                                    <font key="font" metaFont="toolTip"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -224,6 +224,7 @@
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
                             <connections>
+                                <binding destination="-2" name="hidden" keyPath="self.loading" id="Ici-sQ-gVm"/>
                                 <binding destination="-2" name="hidden2" keyPath="self.noData" previousBinding="Ici-sQ-gVm" id="jlH-RV-2R3">
                                     <dictionary key="options">
                                         <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -232,19 +233,18 @@
                                         <integer key="NSNullPlaceholder" value="-1"/>
                                     </dictionary>
                                 </binding>
-                                <binding destination="-2" name="hidden" keyPath="self.loading" id="Ici-sQ-gVm"/>
                                 <outlet property="menu" destination="2sx-7B-nTu" id="CYc-di-j7Z"/>
                             </connections>
                         </scrollView>
                         <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0yJ-6i-qvJ">
                             <rect key="frame" x="234" y="181" width="32" height="32"/>
                             <connections>
-                                <binding destination="-2" name="animate" keyPath="self.loading" id="xgX-kF-4lV"/>
                                 <binding destination="-2" name="hidden" keyPath="self.loading" id="Alo-n4-dYv">
                                     <dictionary key="options">
                                         <string key="NSValueTransformerName">NSNegateBoolean</string>
                                     </dictionary>
                                 </binding>
+                                <binding destination="-2" name="animate" keyPath="self.loading" id="xgX-kF-4lV"/>
                             </connections>
                         </progressIndicator>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vi-aN-MIw">
@@ -255,6 +255,7 @@
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                             <connections>
+                                <binding destination="-2" name="hidden" keyPath="self.loading" id="jl7-EX-8sk"/>
                                 <binding destination="-2" name="hidden2" keyPath="self.noData" previousBinding="jl7-EX-8sk" id="IzN-ZI-Ajx">
                                     <dictionary key="options">
                                         <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -264,7 +265,6 @@
                                         <string key="NSValueTransformerName">NSNegateBoolean</string>
                                     </dictionary>
                                 </binding>
-                                <binding destination="-2" name="hidden" keyPath="self.loading" id="jl7-EX-8sk"/>
                             </connections>
                         </textField>
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="rtA-RY-bCe">

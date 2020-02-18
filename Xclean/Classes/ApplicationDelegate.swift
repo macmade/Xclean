@@ -71,9 +71,14 @@ import Cocoa
             return
         }
         
-        if self.popover?.isShown ?? false
+        if let popover = self.popover
         {
-            return
+            if popover.isShown
+            {
+                popover.close()
+                
+                return
+            }
         }
         
         self.popover                        = NSPopover()
