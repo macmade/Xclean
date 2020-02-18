@@ -286,7 +286,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
         
         let data = arranged[ self.tableView.clickedRow ]
         
-        if data.zombie || data.name == "ModuleCache.noindex"
+        if data.zombie || data.projectPath == nil
         {
             if menuItem.action == #selector( openProject(_:) )
             {
