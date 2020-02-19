@@ -312,8 +312,28 @@
                                 <binding destination="-2" name="animate" keyPath="self.loading" id="xgX-kF-4lV"/>
                             </connections>
                         </progressIndicator>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZv-FU-RvU" customClass="NoVibrancyTextField" customModule="Xclean" customModuleProvider="target">
+                            <rect key="frame" x="167" y="128" width="167" height="177"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" title="🙂" id="56b-yZ-lJu">
+                                <font key="font" metaFont="system" size="150"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="-2" name="hidden2" keyPath="self.noData" previousBinding="44J-Dn-DYB" id="Zl0-D5-Sqe">
+                                    <dictionary key="options">
+                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                        <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                        <integer key="NSNullPlaceholder" value="-1"/>
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
+                                <binding destination="-2" name="hidden" keyPath="self.loading" id="44J-Dn-DYB"/>
+                            </connections>
+                        </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vi-aN-MIw">
-                            <rect key="frame" x="193" y="189" width="115" height="16"/>
+                            <rect key="frame" x="193" y="112" width="115" height="16"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="No Derived Data..." id="iQJ-lc-lzg">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -383,14 +403,14 @@
                         <constraint firstItem="T4D-TU-jOG" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="P3J-sk-0SS"/>
                         <constraint firstItem="8vi-aN-MIw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="RC8-St-1NE"/>
                         <constraint firstItem="Tw5-8v-ei0" firstAttribute="centerY" secondItem="T4D-TU-jOG" secondAttribute="centerY" id="S7n-19-wQT"/>
+                        <constraint firstItem="8vi-aN-MIw" firstAttribute="centerX" secondItem="dZv-FU-RvU" secondAttribute="centerX" id="ShK-v9-L2Y"/>
                         <constraint firstItem="mxv-1X-eMP" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="X1o-W1-409"/>
                         <constraint firstItem="T4D-TU-jOG" firstAttribute="top" secondItem="mxv-1X-eMP" secondAttribute="bottom" constant="20" id="Zic-wb-c30"/>
-                        <constraint firstItem="8vi-aN-MIw" firstAttribute="centerX" secondItem="thh-Zo-gwJ" secondAttribute="centerX" id="bR2-Qh-uir"/>
-                        <constraint firstItem="8vi-aN-MIw" firstAttribute="centerY" secondItem="thh-Zo-gwJ" secondAttribute="centerY" id="cdo-ac-gEy"/>
                         <constraint firstItem="rtA-RY-bCe" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="ddg-iz-Gmw"/>
                         <constraint firstItem="sRF-Ne-dXF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qmu-f6-k7l" secondAttribute="trailing" constant="20" id="dgi-gb-Qmo"/>
                         <constraint firstItem="JDl-X3-5fD" firstAttribute="centerY" secondItem="mxv-1X-eMP" secondAttribute="centerY" id="fcT-Ks-krh"/>
                         <constraint firstItem="oEj-5V-BbY" firstAttribute="leading" secondItem="mxv-1X-eMP" secondAttribute="trailing" constant="20" id="gNN-hU-pkB"/>
+                        <constraint firstItem="8vi-aN-MIw" firstAttribute="top" secondItem="dZv-FU-RvU" secondAttribute="bottom" id="gX4-Z3-PYO"/>
                         <constraint firstItem="Tw5-8v-ei0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="T4D-TU-jOG" secondAttribute="trailing" constant="20" id="hEJ-JJ-OS1"/>
                         <constraint firstItem="Qmu-f6-k7l" firstAttribute="centerY" secondItem="sRF-Ne-dXF" secondAttribute="centerY" id="jR6-db-a04"/>
                         <constraint firstItem="rtA-RY-bCe" firstAttribute="top" secondItem="thh-Zo-gwJ" secondAttribute="bottom" constant="10" id="kHM-H5-BSj"/>
@@ -398,7 +418,9 @@
                         <constraint firstItem="qFY-e4-fw2" firstAttribute="leading" secondItem="0O2-6A-mBC" secondAttribute="leading" constant="20" id="nhm-xM-anW"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="T4D-TU-jOG" secondAttribute="trailing" constant="20" id="pDG-PR-qol"/>
                         <constraint firstAttribute="trailing" secondItem="thh-Zo-gwJ" secondAttribute="trailing" constant="20" id="pFK-u9-dak"/>
+                        <constraint firstItem="dZv-FU-RvU" firstAttribute="centerY" secondItem="thh-Zo-gwJ" secondAttribute="centerY" constant="-20" id="pZ2-Uw-eE6"/>
                         <constraint firstItem="0yJ-6i-qvJ" firstAttribute="centerY" secondItem="thh-Zo-gwJ" secondAttribute="centerY" id="psT-5D-XtP"/>
+                        <constraint firstItem="dZv-FU-RvU" firstAttribute="centerX" secondItem="thh-Zo-gwJ" secondAttribute="centerX" id="tAS-BK-QjN"/>
                         <constraint firstAttribute="trailing" secondItem="rtA-RY-bCe" secondAttribute="trailing" constant="20" id="w2b-My-yW7"/>
                         <constraint firstItem="qFY-e4-fw2" firstAttribute="top" secondItem="T4D-TU-jOG" secondAttribute="bottom" constant="10" id="xYv-zs-8tP"/>
                     </constraints>
