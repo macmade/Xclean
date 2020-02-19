@@ -51,7 +51,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
         
         self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "priority", ascending: false ), NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
         self.autoClean                       = UserDefaults.standard.bool( forKey: "AutoClean" )
-        self.timer                           = Timer( timeInterval: 600, repeats: true ) { [ weak self ] _ in self?.cleanZombies() }
+        self.timer                           = Timer.scheduledTimer( withTimeInterval: 600, repeats: true ) { [ weak self ] _ in self?.cleanZombies() }
         
         let o = self.observe( \.autoClean )
         {
@@ -71,15 +71,6 @@ public class MainViewController: NSViewController, NSMenuDelegate
             return
         }
         
-        guard let all = self.arrayController.content as? [ DerivedData ] else
-        {
-            return
-        }
-        
-        let zombies = all.filter { $0.zombie }
-        
-        self.arrayController.remove( contentsOf: zombies )
-        
         DispatchQueue.global( qos: .background ).async
         {
             if self.cleanLock.try() == false
@@ -88,6 +79,14 @@ public class MainViewController: NSViewController, NSMenuDelegate
             }
             
             defer { self.cleanLock.unlock() }
+            
+            let all     = DerivedData.allDerivedData()
+            let zombies = all.filter { $0.zombie }
+            
+            DispatchQueue.main.async
+            {
+                self.arrayController.remove( contentsOf: zombies )
+            }
             
             for zombie in zombies
             {

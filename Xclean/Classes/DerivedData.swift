@@ -150,4 +150,14 @@ import Cocoa
             }
         }
     }
+    
+    public override func isEqual( _ object: Any? ) -> Bool
+    {
+        guard let data = object as? DerivedData else
+        {
+            return false
+        }
+        
+        return self.url == data.url
+    }
 }
