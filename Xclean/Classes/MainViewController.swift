@@ -51,14 +51,15 @@ public class MainViewController: NSViewController, NSMenuDelegate
         
         self.title                           = "Derived Data"
         self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "priority", ascending: false ), NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
-        self.autoClean                       = UserDefaults.standard.bool( forKey: "AutoClean" )
+        self.autoClean                       = Preferences.shared.autoClean
         self.timer                           = Timer.scheduledTimer( withTimeInterval: 600, repeats: true ) { [ weak self ] _ in self?.cleanZombies() }
         
         let o = self.observe( \.autoClean )
         {
             [ weak self ] o, c in guard let self = self else { return }
             
-            UserDefaults.standard.set( self.autoClean, forKey: "AutoClean" )
+            Preferences.shared.autoClean = self.autoClean
+            
             self.cleanZombies()
         }
         

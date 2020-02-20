@@ -41,12 +41,7 @@ import GitHubUpdates
     @IBOutlet private var updater: GitHubUpdater!
     
     func applicationWillFinishLaunching( _ notification: Notification )
-    {
-        if UserDefaults.standard.value( forKey: "AutoCheckForUpdates" ) == nil
-        {
-            UserDefaults.standard.set( true, forKey: "AutoCheckForUpdates" )
-        }
-    }
+    {}
     
     func applicationDidFinishLaunching( _ notification: Notification )
     {
@@ -77,7 +72,7 @@ import GitHubUpdates
         {
             [ weak self ] o, c in guard let self = self else { return }
             
-            UserDefaults.standard.set( self.automaticallyCheckForUpdates, forKey: "AutoCheckForUpdates" )
+            Preferences.shared.autoCheckForUpdates = self.automaticallyCheckForUpdates
             
             if self.automaticallyCheckForUpdates
             {
@@ -103,11 +98,22 @@ import GitHubUpdates
         
         self.observations.append( contentsOf: [ o1, o2 ] )
         
-        self.automaticallyCheckForUpdates = UserDefaults.standard.bool( forKey: "AutoCheckForUpdates" )
+        self.automaticallyCheckForUpdates = Preferences.shared.autoCheckForUpdates
         
         #if DEBUG
+        
         self.showPopover( nil )
+        
+        #else
+        
+        if Preferences.shared.lastStart == nil
+        {
+            self.showPopover( nil )
+        }
+        
         #endif
+        
+        Preferences.shared.lastStart = Date()
     }
     
     func applicationWillTerminate( _ notification: Notification )

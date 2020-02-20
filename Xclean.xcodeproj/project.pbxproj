@@ -14,6 +14,7 @@
 		055981F623F55D3A0026F198 /* ApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055981F523F55D3A0026F198 /* ApplicationDelegate.swift */; };
 		055981F823F55F140026F198 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055981F723F55F140026F198 /* AboutWindowController.swift */; };
 		055981FB23F55F680026F198 /* AboutWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 055981F923F55F680026F198 /* AboutWindowController.xib */; };
+		05598EEF23FF4E0600C8D8BE /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05598EEE23FF4E0600C8D8BE /* Preferences.swift */; };
 		05765B101EBB99D300D2DDDE /* Xclean.icns in Resources */ = {isa = PBXBuildFile; fileRef = 05765B0F1EBB99D300D2DDDE /* Xclean.icns */; };
 		059B3B7E1ECE2CC500D5013A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059B3B7D1ECE2CC500D5013A /* Security.framework */; };
 		05A364F01EC23007003A93EF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A364EF1EC23007003A93EF /* Cocoa.framework */; };
@@ -72,6 +73,7 @@
 		055981F523F55D3A0026F198 /* ApplicationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDelegate.swift; sourceTree = "<group>"; };
 		055981F723F55F140026F198 /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		055981FA23F55F680026F198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AboutWindowController.xib; sourceTree = "<group>"; };
+		05598EEE23FF4E0600C8D8BE /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		05765B0F1EBB99D300D2DDDE /* Xclean.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Xclean.icns; sourceTree = "<group>"; };
 		0599CFDB21419474009930E6 /* Xclean.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Xclean.entitlements; sourceTree = "<group>"; };
 		059B3B7D1ECE2CC500D5013A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -204,6 +206,7 @@
 				05D26C3C23FB2865006A0D5B /* FileManager.swift */,
 				05D26BFF23F7368C006A0D5B /* MainViewController.swift */,
 				0510BBE723FD418500127CB3 /* NoVibrancyTextField.swift */,
+				05598EEE23FF4E0600C8D8BE /* Preferences.swift */,
 				05D26C4623FB5C40006A0D5B /* NSApplication+LaunchServices.h */,
 				05D26C4723FB5C40006A0D5B /* NSApplication+LaunchServices.m */,
 			);
@@ -488,6 +491,7 @@
 				05D26C3D23FB2865006A0D5B /* FileManager.swift in Sources */,
 				05D26C0723FA9FB6006A0D5B /* BytesToString.swift in Sources */,
 				055981F823F55F140026F198 /* AboutWindowController.swift in Sources */,
+				05598EEF23FF4E0600C8D8BE /* Preferences.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
