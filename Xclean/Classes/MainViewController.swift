@@ -49,6 +49,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         super.viewDidLoad()
         
+        self.title                           = "Derived Data"
         self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "priority", ascending: false ), NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
         self.autoClean                       = UserDefaults.standard.bool( forKey: "AutoClean" )
         self.timer                           = Timer.scheduledTimer( withTimeInterval: 600, repeats: true ) { [ weak self ] _ in self?.cleanZombies() }
@@ -119,6 +120,15 @@ public class MainViewController: NSViewController, NSMenuDelegate
                 self.noData    = data.count == 0
                 self.totalSize = size
                 self.loading   = false
+                
+                if let humanSize = BytesToString().transformedValue( size ) as? String
+                {
+                    self.title = "Derived Data — \(humanSize)"
+                }
+                else
+                {
+                    self.title = "Derived Data"
+                }
                 
                 if( self.loadedOnce == false )
                 {
