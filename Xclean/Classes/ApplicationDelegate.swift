@@ -141,7 +141,7 @@ import GitHubUpdates
             if let event  = NSApp.currentEvent,
                let button = self.statusItem?.button
             {
-                self.mainViewController?.reload()
+                self.mainViewController?.reloadIfNeeded()
                 NSMenu.popUpContextMenu( controller.menuAlternative, with: event, for: button )
             }
         }
@@ -163,7 +163,7 @@ import GitHubUpdates
             
             if let button = self.statusItem?.button
             {
-                self.mainViewController?.reload()
+                self.mainViewController?.reloadIfNeeded()
                 self.popover?.show( relativeTo: NSZeroRect, of: button, preferredEdge: NSRectEdge.minY )
             }
             

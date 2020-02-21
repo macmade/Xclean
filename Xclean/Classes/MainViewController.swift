@@ -40,6 +40,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
     private var observations: [ NSKeyValueObservation ] = []
     private var cleanLock:    NSLock                    = NSLock()
     private var timer:        Timer?
+    private var lastLoad:     Date?
     
     @IBOutlet @objc public dynamic var menuAlternative: NSMenu!
     
@@ -108,6 +109,21 @@ public class MainViewController: NSViewController, NSMenuDelegate
         }
     }
     
+    public func reloadIfNeeded()
+    {
+        if let last = self.lastLoad
+        {
+            let now = Date( timeIntervalSinceNow: 0 )
+            
+            if now.timeIntervalSince1970 <= last.timeIntervalSince1970 + 60
+            {
+                return
+            }
+        }
+        
+        self.reload()
+    }
+    
     public func reload( actionBefore: ( () -> Void )? = nil )
     {
         self.title   = "Derived Data — Loading..."
@@ -149,6 +165,8 @@ public class MainViewController: NSViewController, NSMenuDelegate
                     
                     self.cleanZombies()
                 }
+                
+                self.lastLoad = Date( timeIntervalSinceNow: 0 )
             }
         }
     }
