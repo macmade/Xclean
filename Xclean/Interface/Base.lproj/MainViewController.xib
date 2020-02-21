@@ -475,6 +475,11 @@
                 <menuItem title="Title" enabled="NO" id="hge-P9-nKf">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <binding destination="-2" name="enabled" keyPath="self" id="P47-WG-5WF">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNil</string>
+                            </dictionary>
+                        </binding>
                         <binding destination="-2" name="title" keyPath="self.title" id="gc6-gB-B5Q"/>
                     </connections>
                 </menuItem>

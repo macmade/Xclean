@@ -96,7 +96,17 @@ import GitHubUpdates
             }
         }
         
-        self.observations.append( contentsOf: [ o1, o2 ] )
+        let o3 = Preferences.shared.observe( \.compactView )
+        {
+            [ weak self ] o, c in guard let self = self else { return }
+            
+            if self.popover?.isShown ?? false
+            {
+                self.popover?.close()
+            }
+        }
+        
+        self.observations.append( contentsOf: [ o1, o2, o3 ] )
         
         self.automaticallyCheckForUpdates = Preferences.shared.autoCheckForUpdates
         
