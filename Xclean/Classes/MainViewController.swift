@@ -41,7 +41,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
     private var cleanLock:    NSLock                    = NSLock()
     private var timer:        Timer?
     
-    @objc public dynamic var menuAlternative = NSMenu()
+    @IBOutlet @objc public dynamic var menuAlternative: NSMenu!
     
     public override var nibName: NSNib.Name?
     {

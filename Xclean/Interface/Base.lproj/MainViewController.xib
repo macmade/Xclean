@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="arrayController" destination="IE3-7y-uvC" id="JLl-m0-ZiF"/>
                 <outlet property="mainMenu" destination="g1l-mN-z9O" id="zVR-kW-xDZ"/>
+                <outlet property="menuAlternative" destination="l2C-2c-Ihq" id="BR4-uE-Bbk"/>
                 <outlet property="tableView" destination="h4R-nb-a0T" id="wlR-vm-P35"/>
                 <outlet property="view" destination="c22-O7-iKe" id="6jb-KN-fEM"/>
             </connections>
@@ -468,6 +469,100 @@
                 <outlet property="delegate" destination="-2" id="wJT-az-wLM"/>
             </connections>
             <point key="canvasLocation" x="-268" y="-109"/>
+        </menu>
+        <menu id="l2C-2c-Ihq">
+            <items>
+                <menuItem title="Title" enabled="NO" id="hge-P9-nKf">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="-2" name="title" keyPath="self.title" id="gc6-gB-B5Q"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="S6P-Yw-hkV"/>
+                <menuItem title="Using Significant Space • Click to Clear" enabled="NO" id="Rjb-7F-rHO">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="-2" name="enabled" keyPath="self" id="Po9-kB-RGt">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNil</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="-2" name="hidden" keyPath="self.loading" previousBinding="Po9-kB-RGt" id="12Q-6z-m6N"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="xtH-Lc-AQU">
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="self.loading" id="trr-Q8-gRS"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Clear All..." id="mXu-Hy-Bg1">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="deleteAll:" target="-2" id="fBl-4B-YHm"/>
+                        <binding destination="-2" name="enabled" keyPath="self.loading" id="id2-ZH-JWd">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="Clear Module Cache..." id="Jjo-5D-NX4">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="deleteModuleCache:" target="-2" id="RuD-Rr-dF4"/>
+                        <binding destination="-2" name="enabled" keyPath="self.loading" id="UJE-6Q-56K">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="Options" id="TL7-Av-DhJ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Options" id="a30-2m-662">
+                        <items>
+                            <menuItem title="About Xclean" id="ZCE-Kd-jNP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showAboutWindow:" target="-1" id="hQ6-BZ-OOX"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="EV4-ir-YsL"/>
+                            <menuItem title="Check for Updates..." id="dlu-of-DaO">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkForUpdates:" target="-1" id="miP-DX-n9z"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Automatically Check for Updates" id="24B-Bb-qAh">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="-3" name="value" keyPath="self.delegate.automaticallyCheckForUpdates" id="OHo-XF-p11"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Start Xclean at Login" id="pB1-ew-MNV">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="-3" name="value" keyPath="self.delegate.startAtLogin" id="sE2-f3-nw7"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Use Compact View" id="0C5-bG-sBy">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="-2" name="value" keyPath="self.compactView" id="ndr-F9-nTU"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="0wq-39-ks0"/>
+                <menuItem title="Quit" keyEquivalent="q" id="uKc-qd-icT">
+                    <connections>
+                        <action selector="terminate:" target="-1" id="4il-TS-JFy"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="139" y="-119"/>
         </menu>
     </objects>
     <resources>
