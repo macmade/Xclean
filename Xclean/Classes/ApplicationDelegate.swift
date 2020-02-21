@@ -126,7 +126,7 @@ import GitHubUpdates
             return
         }
         
-        if Preferences.shared.compactView
+        if Preferences.shared.compactView && controller.menuAlternative.items.count > 0
         {
             if let event  = NSApp.currentEvent,
                let button = self.statusItem?.button

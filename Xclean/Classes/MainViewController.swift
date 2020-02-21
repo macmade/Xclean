@@ -30,10 +30,11 @@ public class MainViewController: NSViewController, NSMenuDelegate
     @IBOutlet private var tableView:       NSTableView!
     @IBOutlet private var mainMenu:        NSMenu!
     
-    @objc private dynamic var autoClean = false
-    @objc private dynamic var loading   = false
-    @objc private dynamic var noData    = false
-    @objc private dynamic var totalSize = UInt64( 0 )
+    @objc private dynamic var compactView = false
+    @objc private dynamic var autoClean   = false
+    @objc private dynamic var loading     = false
+    @objc private dynamic var noData      = false
+    @objc private dynamic var totalSize   = UInt64( 0 )
     
     private var loadedOnce:   Bool                      = false
     private var observations: [ NSKeyValueObservation ] = []
@@ -54,9 +55,10 @@ public class MainViewController: NSViewController, NSMenuDelegate
         self.title                           = "Derived Data"
         self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "priority", ascending: false ), NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
         self.autoClean                       = Preferences.shared.autoClean
+        self.compactView                     = Preferences.shared.compactView
         self.timer                           = Timer.scheduledTimer( withTimeInterval: 600, repeats: true ) { [ weak self ] _ in self?.cleanZombies() }
         
-        let o = self.observe( \.autoClean )
+        let o1 = self.observe( \.autoClean )
         {
             [ weak self ] o, c in guard let self = self else { return }
             
@@ -65,7 +67,14 @@ public class MainViewController: NSViewController, NSMenuDelegate
             self.cleanZombies()
         }
         
-        self.observations.append( contentsOf: [ o ] )
+        let o2 = self.observe( \.compactView )
+        {
+            [ weak self ] o, c in guard let self = self else { return }
+            
+            Preferences.shared.compactView = self.compactView
+        }
+        
+        self.observations.append( contentsOf: [ o1, o2 ] )
     }
     
     private func cleanZombies()

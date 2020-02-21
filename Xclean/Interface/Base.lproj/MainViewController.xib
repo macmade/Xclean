@@ -427,6 +427,12 @@
                         <binding destination="-3" name="value" keyPath="self.delegate.startAtLogin" id="F0Q-tm-Cpg"/>
                     </connections>
                 </menuItem>
+                <menuItem title="Use Compact View" id="GZk-29-rVj">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.compactView" id="1dw-c1-c8p"/>
+                    </connections>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="Yu3-kt-oXN"/>
                 <menuItem title="Quit" keyEquivalent="q" id="TRW-zx-SRd">
                     <connections>
