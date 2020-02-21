@@ -52,6 +52,8 @@ import GitHubUpdates
         self.statusItem?.button?.image  = NSImage( named: "StatusIconTemplate" )
         self.mainViewController         = MainViewController()
         
+        self.mainViewController?.reloadIfNeeded()
+        
         let _ = self.mainViewController?.view
         
         let o1 = self.observe( \.startAtLogin )
