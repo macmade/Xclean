@@ -330,10 +330,10 @@
                             <rect key="frame" x="0.0" y="49" width="460" height="5"/>
                         </box>
                         <button toolTip="Automatically remove derived data for projects that no longer exist." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qmu-f6-k7l">
-                            <rect key="frame" x="13" y="17" width="140" height="18"/>
-                            <buttonCell key="cell" type="check" title="Automatic Cleaning" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2oE-7m-U2Q">
+                            <rect key="frame" x="12" y="17" width="124" height="18"/>
+                            <buttonCell key="cell" type="check" title="Automatic Cleaning" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="2oE-7m-U2Q">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="message" size="11"/>
                             </buttonCell>
                             <connections>
                                 <binding destination="-2" name="value" keyPath="self.autoClean" id="8td-mL-kHE"/>
