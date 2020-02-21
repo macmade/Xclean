@@ -567,6 +567,9 @@
                     </connections>
                 </menuItem>
             </items>
+            <connections>
+                <outlet property="delegate" destination="-2" id="sff-mD-EEj"/>
+            </connections>
             <point key="canvasLocation" x="139" y="-119"/>
         </menu>
     </objects>

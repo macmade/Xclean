@@ -171,18 +171,6 @@ public class MainViewController: NSViewController, NSMenuDelegate
         }
     }
     
-    private func rebuildMenu()
-    {
-        var items = [ NSMenuItem ]()
-        
-        if let title = self.title
-        {
-            items.append( NSMenuItem( title: title, action: nil, keyEquivalent: "" ) )
-        }
-        
-        self.menuAlternative.items = items
-    }
-    
     private func delete( url: URL )
     {
         self.reload
@@ -355,21 +343,28 @@ public class MainViewController: NSViewController, NSMenuDelegate
     
     public func menuWillOpen( _ menu: NSMenu )
     {
-        if self.tableView.clickedRow < 0
+        if menu == self.menuAlternative
         {
-            return
+            
         }
-        
-        guard let arranged = self.arrayController.arrangedObjects as? [ DerivedData ] else
+        else
         {
-            return
+            if self.tableView.clickedRow < 0
+            {
+                return
+            }
+            
+            guard let arranged = self.arrayController.arrangedObjects as? [ DerivedData ] else
+            {
+                return
+            }
+            
+            if self.tableView.clickedRow >= arranged.count
+            {
+                return
+            }
+            
+            menu.items.forEach { $0.representedObject = arranged[ self.tableView.clickedRow ] }
         }
-        
-        if self.tableView.clickedRow >= arranged.count
-        {
-            return
-        }
-        
-        menu.items.forEach { $0.representedObject = arranged[ self.tableView.clickedRow ] }
     }
 }
