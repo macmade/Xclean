@@ -75,7 +75,9 @@ public class MainViewController: NSViewController, NSMenuDelegate
             Preferences.shared.compactView = self.compactView
         }
         
-        self.observations.append( contentsOf: [ o1, o2 ] )
+        let o3 = self.arrayController.observe( \.arrangedObjects ) { [ weak self ] o, c in self?.updateMenu() }
+        
+        self.observations.append( contentsOf: [ o1, o2, o3 ] )
     }
     
     private func cleanZombies()
@@ -341,11 +343,41 @@ public class MainViewController: NSViewController, NSMenuDelegate
         return true
     }
     
+    private func updateMenu()
+    {
+        guard let all = self.arrayController.arrangedObjects as? [ DerivedData ] else
+        {
+            return
+        }
+        
+        let sorted = all.sorted { o1, o2 in o1.size > o2.size }.filter { $0.name != "ModuleCache.noindex" }
+        var items  = self.menuAlternative.items.filter{ $0.representedObject == nil }
+        
+        for data in sorted
+        {
+            var title = data.name
+            
+            if data.size > 0, let size = BytesToString().transformedValue( data.size ) as? String
+            {
+                title += " — \(size)"
+            }
+            
+            let item               = NSMenuItem( title: title, action: nil, keyEquivalent: "" )
+            item.representedObject = data
+            item.image             = data.icon.copy() as? NSImage
+            item.image?.size       = NSMakeSize( 16, 16 )
+            
+            items.append( item )
+        }
+        
+        self.menuAlternative.items = items
+    }
+    
     public func menuWillOpen( _ menu: NSMenu )
     {
         if menu == self.menuAlternative
         {
-            
+            self.updateMenu()
         }
         else
         {
