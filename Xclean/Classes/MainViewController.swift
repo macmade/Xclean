@@ -40,6 +40,8 @@ public class MainViewController: NSViewController, NSMenuDelegate
     private var cleanLock:    NSLock                    = NSLock()
     private var timer:        Timer?
     
+    @objc public dynamic var menuAlternative = NSMenu()
+    
     public override var nibName: NSNib.Name?
     {
         return "MainViewController"
@@ -99,6 +101,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
     
     public func reload( actionBefore: ( () -> Void )? = nil )
     {
+        self.title   = "Derived Data — Loading..."
         self.loading = true
         
         DispatchQueue.global( qos: .userInitiated ).async
@@ -139,6 +142,18 @@ public class MainViewController: NSViewController, NSMenuDelegate
                 }
             }
         }
+    }
+    
+    private func rebuildMenu()
+    {
+        var items = [ NSMenuItem ]()
+        
+        if let title = self.title
+        {
+            items.append( NSMenuItem( title: title, action: nil, keyEquivalent: "" ) )
+        }
+        
+        self.menuAlternative.items = items
     }
     
     private func delete( url: URL )

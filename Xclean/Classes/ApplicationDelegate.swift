@@ -126,29 +126,41 @@ import GitHubUpdates
             return
         }
         
-        if let popover = self.popover
+        if Preferences.shared.compactView
         {
-            if popover.isShown
+            if let event  = NSApp.currentEvent,
+               let button = self.statusItem?.button
             {
-                popover.close()
-                
-                return
+                self.mainViewController?.reload()
+                NSMenu.popUpContextMenu( controller.menuAlternative, with: event, for: button )
             }
         }
-        
-        self.popover                        = NSPopover()
-        self.popover?.contentViewController = controller
-        self.popover?.behavior              = .applicationDefined
-        
-        if let button = self.statusItem?.button
+        else
         {
-            self.mainViewController?.reload()
-            self.popover?.show( relativeTo: NSZeroRect, of: button, preferredEdge: NSRectEdge.minY )
-        }
-        
-        self.popoverTranscientEvent = NSEvent.addGlobalMonitorForEvents( matching: .leftMouseUp )
-        {
-            _ in self.popover?.close()
+            if let popover = self.popover
+            {
+                if popover.isShown
+                {
+                    popover.close()
+                    
+                    return
+                }
+            }
+            
+            self.popover                        = NSPopover()
+            self.popover?.contentViewController = controller
+            self.popover?.behavior              = .applicationDefined
+            
+            if let button = self.statusItem?.button
+            {
+                self.mainViewController?.reload()
+                self.popover?.show( relativeTo: NSZeroRect, of: button, preferredEdge: NSRectEdge.minY )
+            }
+            
+            self.popoverTranscientEvent = NSEvent.addGlobalMonitorForEvents( matching: .leftMouseUp )
+            {
+                _ in self.popover?.close()
+            }
         }
     }
     

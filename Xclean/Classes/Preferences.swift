@@ -29,6 +29,7 @@ import Cocoa
     @objc public dynamic var lastStart:           Date?
     @objc public dynamic var autoCheckForUpdates: Bool = true
     @objc public dynamic var autoClean:           Bool = false
+    @objc public dynamic var compactView:         Bool = false
     
     @objc public static let shared = Preferences()
     
