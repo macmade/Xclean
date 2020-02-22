@@ -28,8 +28,6 @@ public class DerivedDataMenuItem: NSMenuItem
 {
     @objc public private( set ) dynamic var data: DerivedData?
     
-    private var controller: DerivedDataMenuItemViewController?
-    
     public convenience init( data: DerivedData, target: AnyObject, action: Selector )
     {
         self.init( title: data.name, action: nil, keyEquivalent: "" )
@@ -39,7 +37,5 @@ public class DerivedDataMenuItem: NSMenuItem
         self.image?.size       = NSMakeSize( 16, 16 )
         self.target            = target
         self.action            = action
-        self.controller        = DerivedDataMenuItemViewController( data: data )
-        self.view              = self.controller?.view
     }
 }
