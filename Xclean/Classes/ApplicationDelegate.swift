@@ -47,14 +47,13 @@ import GitHubUpdates
     {
         self.startAtLogin               = NSApp.isLoginItemEnabled()
         self.statusItem                 = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
-        self.statusItem?.button?.target = self
-        self.statusItem?.button?.action = #selector( showPopover(_:) )
         self.statusItem?.button?.image  = NSImage( named: "StatusIconTemplate" )
         self.mainViewController         = MainViewController()
         
-        self.mainViewController?.reloadIfNeeded()
-        
         let _ = self.mainViewController?.view
+        
+        self.mainViewController?.reloadIfNeeded()
+        self.updateStatusItem()
         
         let o1 = self.observe( \.startAtLogin )
         {
@@ -106,6 +105,8 @@ import GitHubUpdates
             {
                 self.popover?.close()
             }
+            
+            self.updateStatusItem()
         }
         
         self.observations.append( contentsOf: [ o1, o2, o3 ] )
@@ -130,6 +131,22 @@ import GitHubUpdates
     
     func applicationWillTerminate( _ notification: Notification )
     {}
+    
+    private func updateStatusItem()
+    {
+        if Preferences.shared.compactView
+        {
+            self.statusItem?.button?.target = nil
+            self.statusItem?.button?.action = nil
+            self.statusItem?.menu           = self.mainViewController?.menuAlternative
+        }
+        else
+        {
+            self.statusItem?.button?.target = self
+            self.statusItem?.button?.action = #selector( showPopover(_:) )
+            self.statusItem?.menu           = nil
+        }
+    }
     
     @IBAction func showPopover( _ sender: Any? )
     {
