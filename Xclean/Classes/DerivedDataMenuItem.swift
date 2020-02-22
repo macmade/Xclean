@@ -28,14 +28,41 @@ public class DerivedDataMenuItem: NSMenuItem
 {
     @objc public private( set ) dynamic var data: DerivedData?
     
+    private var observations = [ NSKeyValueObservation ]()
+    
     public convenience init( data: DerivedData, target: AnyObject, action: Selector )
     {
         self.init( title: data.name, action: nil, keyEquivalent: "" )
         
+        self.data              = data
         self.representedObject = data
         self.image             = data.icon.copy() as? NSImage
         self.image?.size       = NSMakeSize( 16, 16 )
         self.target            = target
         self.action            = action
+        
+        let o1 = data.observe( \.loading ) { [ weak self ] _, _ in self?.updateTitle() }
+        let o2 = data.observe( \.size    ) { [ weak self ] _, _ in self?.updateTitle() }
+        
+        self.observations.append( contentsOf: [ o1, o2 ] )
+        
+        self.updateTitle()
+    }
+    
+    private func updateTitle()
+    {
+        guard let data = self.data else
+        {
+            return
+        }
+        
+        if data.loading || data.size == 0
+        {
+            self.title = data.name
+        }
+        else if let humanSize = BytesToString().transformedValue( data.size ) as? String
+        {
+            self.title = "\(data.name) — \(humanSize)"
+        }
     }
 }
