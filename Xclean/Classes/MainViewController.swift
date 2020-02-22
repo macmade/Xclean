@@ -102,6 +102,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
             DispatchQueue.main.async
             {
                 self.arrayController.remove( contentsOf: zombies )
+                self.updateMenu()
             }
             
             for zombie in zombies
