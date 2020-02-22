@@ -75,7 +75,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
             Preferences.shared.compactView = self.compactView
         }
         
-        let o3 = self.arrayController.observe( \.arrangedObjects ) { [ weak self ] o, c in self?.updateMenu() }
+        let o3 = self.observe( \.loading ) { [ weak self ] o, c in self?.updateMenu() }
         
         self.observations.append( contentsOf: [ o1, o2, o3 ] )
     }
@@ -148,10 +148,6 @@ public class MainViewController: NSViewController, NSMenuDelegate
                 self.arrayController.remove( contentsOf: self.arrayController.content as? [ Any ] ?? [] )
                 self.arrayController.add( contentsOf: data )
                 
-                self.noData    = data.count == 0
-                self.totalSize = size
-                self.loading   = false
-                
                 if let humanSize = BytesToString().transformedValue( size ) as? String
                 {
                     self.title = "Derived Data — \(humanSize)"
@@ -168,7 +164,10 @@ public class MainViewController: NSViewController, NSMenuDelegate
                     self.cleanZombies()
                 }
                 
-                self.lastLoad = Date( timeIntervalSinceNow: 0 )
+                self.lastLoad  = Date( timeIntervalSinceNow: 0 )
+                self.noData    = data.count == 0
+                self.totalSize = size
+                self.loading   = false
             }
         }
     }
@@ -191,9 +190,17 @@ public class MainViewController: NSViewController, NSMenuDelegate
         }
     }
     
-    @objc private func deleteData( _ data: DerivedData )
+    @objc private func deleteData( _ sender: Any? )
     {
-        self.delete( url: data.url );
+        if let data = sender as? DerivedData
+        {
+            self.delete( url: data.url );
+        }
+        else if let item = sender                 as? NSMenuItem,
+                let data = item.representedObject as? DerivedData
+        {
+            self.delete( url: data.url );
+        }
     }
     
     @IBAction private func deleteAll( _ sender: Any? )
@@ -311,6 +318,11 @@ public class MainViewController: NSViewController, NSMenuDelegate
             return true
         }
         
+        if menuItem.menu == self.menuAlternative
+        {
+            return true
+        }
+        
         if self.tableView.clickedRow < 0
         {
             return false
@@ -345,15 +357,21 @@ public class MainViewController: NSViewController, NSMenuDelegate
     
     private func updateMenu()
     {
+        self.menuAlternative.items = self.menuAlternative.items.filter { $0.representedObject == nil }
+        
+        if self.loading
+        {
+            return
+        }
+        
         guard let all = self.arrayController.arrangedObjects as? [ DerivedData ] else
         {
             return
         }
         
         let sorted = all.sorted { o1, o2 in o1.size > o2.size }.filter { $0.name != "ModuleCache.noindex" }
-        var items  = self.menuAlternative.items.filter{ $0.representedObject == nil }
         
-        for data in sorted
+        for data in sorted[ 0 ..< 5 ].reversed()
         {
             var title = data.name
             
@@ -366,18 +384,18 @@ public class MainViewController: NSViewController, NSMenuDelegate
             item.representedObject = data
             item.image             = data.icon.copy() as? NSImage
             item.image?.size       = NSMakeSize( 16, 16 )
+            item.target            = self
+            item.action            = #selector( deleteData(_:) )
             
-            items.append( item )
+            self.menuAlternative.items.insert( item, at: 3 )
         }
-        
-        self.menuAlternative.items = items
     }
     
     public func menuWillOpen( _ menu: NSMenu )
     {
         if menu == self.menuAlternative
         {
-            self.updateMenu()
+            self.reloadIfNeeded()
         }
         else
         {
