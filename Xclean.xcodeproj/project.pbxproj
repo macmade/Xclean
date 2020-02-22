@@ -15,6 +15,9 @@
 		055981F823F55F140026F198 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055981F723F55F140026F198 /* AboutWindowController.swift */; };
 		055981FB23F55F680026F198 /* AboutWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 055981F923F55F680026F198 /* AboutWindowController.xib */; };
 		05598EEF23FF4E0600C8D8BE /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05598EEE23FF4E0600C8D8BE /* Preferences.swift */; };
+		05598F11240176A600C8D8BE /* DerivedDataMenuItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05598F0E240176A600C8D8BE /* DerivedDataMenuItemViewController.swift */; };
+		05598F12240176A600C8D8BE /* DerivedDataMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05598F10240176A600C8D8BE /* DerivedDataMenuItem.swift */; };
+		05598F15240176B400C8D8BE /* DerivedDataMenuItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05598F13240176B400C8D8BE /* DerivedDataMenuItemViewController.xib */; };
 		05765B101EBB99D300D2DDDE /* Xclean.icns in Resources */ = {isa = PBXBuildFile; fileRef = 05765B0F1EBB99D300D2DDDE /* Xclean.icns */; };
 		059B3B7E1ECE2CC500D5013A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059B3B7D1ECE2CC500D5013A /* Security.framework */; };
 		05A364F01EC23007003A93EF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A364EF1EC23007003A93EF /* Cocoa.framework */; };
@@ -74,6 +77,9 @@
 		055981F723F55F140026F198 /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		055981FA23F55F680026F198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AboutWindowController.xib; sourceTree = "<group>"; };
 		05598EEE23FF4E0600C8D8BE /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		05598F0E240176A600C8D8BE /* DerivedDataMenuItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DerivedDataMenuItemViewController.swift; sourceTree = "<group>"; };
+		05598F10240176A600C8D8BE /* DerivedDataMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DerivedDataMenuItem.swift; sourceTree = "<group>"; };
+		05598F14240176B400C8D8BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DerivedDataMenuItemViewController.xib; sourceTree = "<group>"; };
 		05765B0F1EBB99D300D2DDDE /* Xclean.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Xclean.icns; sourceTree = "<group>"; };
 		0599CFDB21419474009930E6 /* Xclean.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Xclean.entitlements; sourceTree = "<group>"; };
 		059B3B7D1ECE2CC500D5013A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -188,9 +194,10 @@
 		050B84E01EB9C8070090EA12 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				055981F923F55F680026F198 /* AboutWindowController.xib */,
+				05598F13240176B400C8D8BE /* DerivedDataMenuItemViewController.xib */,
 				050B84FB1EB9CCD60090EA12 /* Images */,
 				050B84F81EB9C90C0090EA12 /* MainMenu.xib */,
-				055981F923F55F680026F198 /* AboutWindowController.xib */,
 				05D26C0123F736AC006A0D5B /* MainViewController.xib */,
 			);
 			path = Interface;
@@ -203,12 +210,14 @@
 				055981F523F55D3A0026F198 /* ApplicationDelegate.swift */,
 				05D26C0623FA9FB6006A0D5B /* BytesToString.swift */,
 				05D26C0423F73AE6006A0D5B /* DerivedData.swift */,
+				05598F10240176A600C8D8BE /* DerivedDataMenuItem.swift */,
+				05598F0E240176A600C8D8BE /* DerivedDataMenuItemViewController.swift */,
 				05D26C3C23FB2865006A0D5B /* FileManager.swift */,
 				05D26BFF23F7368C006A0D5B /* MainViewController.swift */,
 				0510BBE723FD418500127CB3 /* NoVibrancyTextField.swift */,
-				05598EEE23FF4E0600C8D8BE /* Preferences.swift */,
 				05D26C4623FB5C40006A0D5B /* NSApplication+LaunchServices.h */,
 				05D26C4723FB5C40006A0D5B /* NSApplication+LaunchServices.m */,
+				05598EEE23FF4E0600C8D8BE /* Preferences.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -452,6 +461,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05598F15240176B400C8D8BE /* DerivedDataMenuItemViewController.xib in Resources */,
 				055981FB23F55F680026F198 /* AboutWindowController.xib in Resources */,
 				05765B101EBB99D300D2DDDE /* Xclean.icns in Resources */,
 				05D26C4123FB58AC006A0D5B /* StatusIconTemplate.pdf in Resources */,
@@ -487,10 +497,12 @@
 				05D26C0023F7368C006A0D5B /* MainViewController.swift in Sources */,
 				05D26C0523F73AE7006A0D5B /* DerivedData.swift in Sources */,
 				055981F623F55D3A0026F198 /* ApplicationDelegate.swift in Sources */,
+				05598F12240176A600C8D8BE /* DerivedDataMenuItem.swift in Sources */,
 				05D26C4823FB5C40006A0D5B /* NSApplication+LaunchServices.m in Sources */,
 				05D26C3D23FB2865006A0D5B /* FileManager.swift in Sources */,
 				05D26C0723FA9FB6006A0D5B /* BytesToString.swift in Sources */,
 				055981F823F55F140026F198 /* AboutWindowController.swift in Sources */,
+				05598F11240176A600C8D8BE /* DerivedDataMenuItemViewController.swift in Sources */,
 				05598EEF23FF4E0600C8D8BE /* Preferences.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,6 +532,14 @@
 				055981FA23F55F680026F198 /* Base */,
 			);
 			name = AboutWindowController.xib;
+			sourceTree = "<group>";
+		};
+		05598F13240176B400C8D8BE /* DerivedDataMenuItemViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05598F14240176B400C8D8BE /* Base */,
+			);
+			name = DerivedDataMenuItemViewController.xib;
 			sourceTree = "<group>";
 		};
 		05D26C0123F736AC006A0D5B /* MainViewController.xib */ = {

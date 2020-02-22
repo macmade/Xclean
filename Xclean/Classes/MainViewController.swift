@@ -371,21 +371,9 @@ public class MainViewController: NSViewController, NSMenuDelegate
         
         let sorted = all.sorted { o1, o2 in o1.size > o2.size }.filter { $0.name != "ModuleCache.noindex" }
         
-        for data in sorted[ 0 ..< 5 ].reversed()
+        for data in sorted.prefix( 10 ).reversed()
         {
-            var title = data.name
-            
-            if data.size > 0, let size = BytesToString().transformedValue( data.size ) as? String
-            {
-                title += " — \(size)"
-            }
-            
-            let item               = NSMenuItem( title: title, action: nil, keyEquivalent: "" )
-            item.representedObject = data
-            item.image             = data.icon.copy() as? NSImage
-            item.image?.size       = NSMakeSize( 16, 16 )
-            item.target            = self
-            item.action            = #selector( deleteData(_:) )
+            let item = DerivedDataMenuItem( data: data, target: self, action: #selector( deleteData(_:) ) )
             
             self.menuAlternative.items.insert( item, at: 3 )
         }
