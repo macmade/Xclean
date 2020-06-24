@@ -80,8 +80,6 @@
 		0599CFDB21419474009930E6 /* Xclean.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Xclean.entitlements; sourceTree = "<group>"; };
 		059B3B7D1ECE2CC500D5013A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		05A364EF1EC23007003A93EF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		05A364F31EC23072003A93EF /* ccache-config.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "ccache-config.sh"; sourceTree = "<group>"; };
-		05A364F41EC23072003A93EF /* ccache.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ccache.sh; sourceTree = "<group>"; };
 		05C83D9B2141797C00A9ED6D /* Release - ccache.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release - ccache.xcconfig"; sourceTree = "<group>"; };
 		05C83D9C2141797C00A9ED6D /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		05C83D9D2141797C00A9ED6D /* Debug - ccache.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug - ccache.xcconfig"; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 				050B84CB1EB93FF90090EA12 /* Xclean */,
 				05A364EE1EC23007003A93EF /* Frameworks */,
 				050B84CA1EB93FF90090EA12 /* Products */,
-				05A364F11EC23072003A93EF /* Scripts */,
 			);
 			sourceTree = "<group>";
 		};
@@ -241,15 +238,6 @@
 				05A364EF1EC23007003A93EF /* Cocoa.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		05A364F11EC23072003A93EF /* Scripts */ = {
-			isa = PBXGroup;
-			children = (
-				05A364F31EC23072003A93EF /* ccache-config.sh */,
-				05A364F41EC23072003A93EF /* ccache.sh */,
-			);
-			path = Scripts;
 			sourceTree = "<group>";
 		};
 		05C83D9A2141797C00A9ED6D /* xcconfig */ = {
