@@ -1,6 +1,0 @@
-language: objective-c
-osx_image: xcode12.5
-script:
-- set -o pipefail && xcodebuild -project "Xclean.xcodeproj" -scheme "Xclean" build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
-notifications:
-    slack: xs-labs:FXh1yLXNkpcVxKZhZU6icdhI
