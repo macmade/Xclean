@@ -1,14 +1,12 @@
 Xclean
 ======
 
-[![Build Status](https://img.shields.io/travis/com/macmade/Xclean.svg?branch=master&style=flat)](https://travis-ci.com/macmade/Xclean)
-[![Issues](http://img.shields.io/github/issues/macmade/Xclean.svg?style=flat)](https://github.com/macmade/Xclean/issues)
-![Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)
-![License](https://img.shields.io/badge/license-mit-brightgreen.svg?style=flat)
-[![Contact](https://img.shields.io/badge/contact-@macmade-blue.svg?style=flat)](https://twitter.com/macmade)  
-[![Donate-Patreon](https://img.shields.io/badge/donate-patreon-yellow.svg?style=flat)](https://patreon.com/macmade)
-[![Donate-Gratipay](https://img.shields.io/badge/donate-gratipay-yellow.svg?style=flat)](https://www.gratipay.com/macmade)
-[![Donate-Paypal](https://img.shields.io/badge/donate-paypal-yellow.svg?style=flat)](https://paypal.me/xslabs)
+[![Build Status](https://img.shields.io/github/workflow/status/macmade/Xclean/ci-mac?label=macOS&logo=apple)](https://github.com/macmade/Xclean/actions/workflows/ci-mac.yaml)
+[![Issues](http://img.shields.io/github/issues/macmade/Xclean.svg?logo=github)](https://github.com/macmade/Xclean/issues)
+![Status](https://img.shields.io/badge/status-active-brightgreen.svg?logo=git)
+![License](https://img.shields.io/badge/license-mit-brightgreen.svg?logo=open-source-initiative)  
+[![Contact](https://img.shields.io/badge/follow-@macmade-blue.svg?logo=twitter&style=social)](https://twitter.com/macmade)
+[![Sponsor](https://img.shields.io/badge/sponsor-macmade-pink.svg?logo=github-sponsors&style=social)](https://github.com/sponsors/macmade)
 
 ### About
 
