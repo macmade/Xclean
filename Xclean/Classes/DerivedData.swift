@@ -28,12 +28,8 @@ import Cocoa
 {
     public class var derivedDataURL: URL?
     {
-        guard let xUD = UserDefaults.init(suiteName: "com.apple.dt.Xcode") else
-        {
-            return nil
-        }
-        
-        if let url = xUD.url(forKey: "IDECustomDerivedDataLocation")
+        if let xUD = UserDefaults.init( suiteName: "com.apple.dt.Xcode" ),
+           let url = xUD.url( forKey: "IDECustomDerivedDataLocation" )
         {
             return url
         }
