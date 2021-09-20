@@ -28,11 +28,21 @@ import Cocoa
 {
     public class var derivedDataURL: URL?
     {
-        guard let library = NSSearchPathForDirectoriesInDomains( .libraryDirectory, .userDomainMask, true ).first else
+        guard let xUD = UserDefaults.init(suiteName: "com.apple.dt.Xcode") else
         {
             return nil
         }
         
+        if let url = xUD.url(forKey: "IDECustomDerivedDataLocation")
+        {
+            return url
+        }
+        
+        guard let library = NSSearchPathForDirectoriesInDomains( .libraryDirectory, .userDomainMask, true ).first else
+        {
+            return nil
+        }
+
         let developer = ( library   as NSString ).appendingPathComponent( "Developer" )
         let xcode     = ( developer as NSString ).appendingPathComponent( "Xcode" )
         let derived   = ( xcode     as NSString ).appendingPathComponent( "DerivedData" )
