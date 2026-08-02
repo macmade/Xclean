@@ -23,6 +23,7 @@
  ******************************************************************************/
 
 import Cocoa
+import UniformTypeIdentifiers
 
 @objc public class DerivedData: NSObject
 {
@@ -43,6 +44,11 @@ import Cocoa
     public class var moduleCacheURL: URL?
     {
         return derivedDataURL?.appendingPathComponent( "ModuleCache.noindex" )
+    }
+    
+    private class func icon( forFilenameExtension filenameExtension: String ) -> NSImage
+    {
+        return NSWorkspace.shared.icon( for: UTType( filenameExtension: filenameExtension ) ?? .data )
     }
     
     @objc public dynamic var url:         URL
@@ -103,7 +109,7 @@ import Cocoa
             self.projectPath = nil
             self.name        = url.lastPathComponent
             self.size        = 0
-            self.icon        = NSWorkspace.shared.icon( forFileType: "dylib" )
+            self.icon        = Self.icon( forFilenameExtension: "dylib" )
             self.loading     = true
             self.zombie      = false
             self.priority    = 10
@@ -131,7 +137,7 @@ import Cocoa
             self.projectPath = workspace
             self.name        = FileManager.default.displayName( atPath: workspace )
             self.size        = 0
-            self.icon        = NSWorkspace.shared.icon( forFileType: ( workspace as NSString ).pathExtension )
+            self.icon        = Self.icon( forFilenameExtension: ( workspace as NSString ).pathExtension )
             self.loading     = true
             self.zombie      = FileManager.default.fileExists( atPath: workspace ) == false
             self.priority    = 0

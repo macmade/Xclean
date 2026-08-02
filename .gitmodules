@@ -3,4 +3,4 @@
 	url = https://github.com/macmade/xcconfig.git
 [submodule "Submodules/GitHubUpdates"]
 	path = Submodules/GitHubUpdates
-	url = https://github.com/macmade/GitHubUpdates.git
+	url = https://github.com/luisrh01/GitHubUpdates.git
