@@ -31,7 +31,6 @@ import GitHubUpdates
     private var aboutWindowController:  AboutWindowController?
     private var popover:                NSPopover?
     private var mainViewController:     MainViewController?
-    private var popoverTranscientEvent: Any?
     private var updateCheckTimer:       Timer?
     private var observations:           [ NSKeyValueObservation ] = []
     
@@ -47,7 +46,7 @@ import GitHubUpdates
     {
         self.startAtLogin               = NSApp.isLoginItemEnabled()
         self.statusItem                 = NSStatusBar.system.statusItem( withLength: NSStatusItem.squareLength )
-        self.statusItem?.button?.image  = NSImage( named: "StatusIconTemplate" )
+        self.configureStatusItemButton()
         self.mainViewController         = MainViewController()
         
         let _ = self.mainViewController?.view
@@ -132,6 +131,33 @@ import GitHubUpdates
     func applicationWillTerminate( _ notification: Notification )
     {}
     
+    func applicationShouldTerminateAfterLastWindowClosed( _ sender: NSApplication ) -> Bool
+    {
+        return false
+    }
+    
+    private func configureStatusItemButton()
+    {
+        guard let button = self.statusItem?.button else
+        {
+            return
+        }
+        
+        if let imageURL = Bundle.main.url( forResource: "StatusIconTemplate", withExtension: "pdf" ),
+           let image = NSImage( contentsOf: imageURL )
+        {
+            image.isTemplate = true
+            image.size       = NSSize( width: 18, height: 18 )
+            button.image     = image
+            button.title     = ""
+        }
+        else
+        {
+            button.image = nil
+            button.title = "X"
+        }
+    }
+    
     private func updateStatusItem()
     {
         if Preferences.shared.compactView
@@ -166,29 +192,20 @@ import GitHubUpdates
         }
         else
         {
-            if let popover = self.popover
+            if self.popover?.isShown ?? false
             {
-                if popover.isShown
-                {
-                    popover.close()
-                    
-                    return
-                }
+                return
             }
             
-            self.popover                        = NSPopover()
-            self.popover?.contentViewController = controller
-            self.popover?.behavior              = .applicationDefined
+            let popover               = NSPopover()
+            popover.contentViewController = controller
+            popover.behavior          = .transient
+            self.popover              = popover
             
             if let button = self.statusItem?.button
             {
                 self.mainViewController?.reloadIfNeeded()
-                self.popover?.show( relativeTo: NSZeroRect, of: button, preferredEdge: NSRectEdge.minY )
-            }
-            
-            self.popoverTranscientEvent = NSEvent.addGlobalMonitorForEvents( matching: .leftMouseUp )
-            {
-                _ in self.popover?.close()
+                popover.show( relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY )
             }
         }
     }
