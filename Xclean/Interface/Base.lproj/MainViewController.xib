@@ -308,7 +308,7 @@
                         </textField>
                         <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vi-aN-MIw">
                             <rect key="frame" x="173" y="94" width="115" height="16"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="No Derived Data..." id="iQJ-lc-lzg">
+                            <textFieldCell key="cell" lineBreakMode="clipping" title="Nothing to Clean..." id="iQJ-lc-lzg">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

@@ -41,6 +41,8 @@ public class MainViewController: NSViewController, NSMenuDelegate
     private var cleanLock:    NSLock                    = NSLock()
     private var timer:        Timer?
     private var lastLoad:     Date?
+    private var reclaimedStatsMenuItem: NSMenuItem?
+    private var scanScopeMenuItem:     NSMenuItem?
     
     @IBOutlet @objc public dynamic var menuAlternative: NSMenu!
     
@@ -53,7 +55,7 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         super.viewDidLoad()
         
-        self.title                           = "Derived Data"
+        self.title                           = "Xcode Caches"
         self.arrayController.sortDescriptors = [ NSSortDescriptor( key: "priority", ascending: false ), NSSortDescriptor( key: "name", ascending: true, selector: #selector( NSString.localizedCaseInsensitiveCompare(_:) ) ) ]
         self.autoClean                       = Preferences.shared.autoClean
         self.compactView                     = Preferences.shared.compactView
@@ -78,6 +80,186 @@ public class MainViewController: NSViewController, NSMenuDelegate
         let o3 = self.observe( \.loading ) { [ weak self ] o, c in self?.updateMenu() }
         
         self.observations.append( contentsOf: [ o1, o2, o3 ] )
+        
+        self.installReclaimedStatsMenuItem()
+        self.installScanScopeMenu()
+    }
+    
+    /*
+     * Adds a disabled, informational item (plus a leading separator) to the
+     * end of mainMenu -- right before Quit -- showing lifetime space
+     * reclaimed and when Xclean last cleaned anything. Done entirely in
+     * code so this never has to touch the XIB.
+     */
+    private func installReclaimedStatsMenuItem()
+    {
+        guard self.reclaimedStatsMenuItem == nil else
+        {
+            return
+        }
+        
+        let statsItem = NSMenuItem( title: "", action: nil, keyEquivalent: "" )
+        
+        statsItem.isEnabled = false
+        
+        let insertAt = max( 0, self.mainMenu.items.count - 1 )
+        
+        self.mainMenu.insertItem( NSMenuItem.separator(), at: insertAt )
+        self.mainMenu.insertItem( statsItem, at: insertAt + 1 )
+        
+        self.reclaimedStatsMenuItem = statsItem
+        
+        self.updateReclaimedStatsMenuItem()
+    }
+    
+    private func updateReclaimedStatsMenuItem()
+    {
+        guard let item = self.reclaimedStatsMenuItem else
+        {
+            return
+        }
+        
+        let total = Preferences.shared.totalBytesReclaimed
+        
+        guard total > 0, let humanSize = BytesToString().transformedValue( total ) as? String else
+        {
+            item.title = "Nothing reclaimed yet"
+            
+            return
+        }
+        
+        if let last = Preferences.shared.lastCleanedAt
+        {
+            let formatter      = RelativeDateTimeFormatter()
+            formatter.unitsStyle = .full
+            
+            item.title = "Reclaimed \(humanSize) total (last \(formatter.localizedString( for: last, relativeTo: Date() )))"
+        }
+        else
+        {
+            item.title = "Reclaimed \(humanSize) total"
+        }
+    }
+    
+    private func recordReclaimed( bytes: UInt64 )
+    {
+        guard bytes > 0 else
+        {
+            return
+        }
+        
+        Preferences.shared.totalBytesReclaimed += bytes
+        Preferences.shared.lastCleanedAt        = Date()
+        
+        self.updateReclaimedStatsMenuItem()
+    }
+    
+    /*
+     * One case per cache category Xclean knows about. `isEnabled` reads
+     * and writes straight through to the matching Preferences.shared.scanXxx
+     * flag, so the enum itself holds no state -- it's just a typed,
+     * CaseIterable way to walk & label those flags for the "Scan For" menu.
+     */
+    private enum ScanScope: Int, CaseIterable
+    {
+        case derivedData    = 0
+        case simulatorCache = 1
+        case deviceSupport  = 2
+        case spmCache       = 3
+        case podsCache      = 4
+        case archives       = 5
+        
+        var title: String
+        {
+            switch self
+            {
+                case .derivedData:    return "Derived Data & Modules"
+                case .simulatorCache: return "Simulator Caches"
+                case .deviceSupport:  return "Device Support"
+                case .spmCache:       return "Swift Package Manager Cache"
+                case .podsCache:      return "CocoaPods Cache"
+                case .archives:       return "Archives"
+            }
+        }
+        
+        var isEnabled: Bool
+        {
+            get
+            {
+                switch self
+                {
+                    case .derivedData:    return Preferences.shared.scanDerivedData
+                    case .simulatorCache: return Preferences.shared.scanSimulatorCache
+                    case .deviceSupport:  return Preferences.shared.scanDeviceSupport
+                    case .spmCache:       return Preferences.shared.scanSPMCache
+                    case .podsCache:      return Preferences.shared.scanPodsCache
+                    case .archives:       return Preferences.shared.scanArchives
+                }
+            }
+            set
+            {
+                switch self
+                {
+                    case .derivedData:    Preferences.shared.scanDerivedData    = newValue
+                    case .simulatorCache: Preferences.shared.scanSimulatorCache = newValue
+                    case .deviceSupport:  Preferences.shared.scanDeviceSupport  = newValue
+                    case .spmCache:       Preferences.shared.scanSPMCache       = newValue
+                    case .podsCache:      Preferences.shared.scanPodsCache      = newValue
+                    case .archives:       Preferences.shared.scanArchives       = newValue
+                }
+            }
+        }
+    }
+    
+    /*
+     * Adds a "Scan For" submenu (one checkable item per cache category) to
+     * mainMenu, just below the reclaimed-stats item and above Quit, so
+     * Jamie can turn off categories he doesn't want Xclean to look at or
+     * show. Built entirely in code, same as the stats item above -- no
+     * XIB changes.
+     */
+    private func installScanScopeMenu()
+    {
+        guard self.scanScopeMenuItem == nil else
+        {
+            return
+        }
+        
+        let scanMenu     = NSMenu( title: "Scan For" )
+        let scanMenuItem = NSMenuItem( title: "Scan For", action: nil, keyEquivalent: "" )
+        
+        scanMenuItem.submenu = scanMenu
+        
+        for scope in ScanScope.allCases
+        {
+            let item = NSMenuItem( title: scope.title, action: #selector( self.toggleScanScope(_:) ), keyEquivalent: "" )
+            
+            item.target = self
+            item.tag    = scope.rawValue
+            item.state  = scope.isEnabled ? .on : .off
+            
+            scanMenu.addItem( item )
+        }
+        
+        let insertAt = max( 0, self.mainMenu.items.count - 1 )
+        
+        self.mainMenu.insertItem( scanMenuItem, at: insertAt )
+        
+        self.scanScopeMenuItem = scanMenuItem
+    }
+    
+    @objc private func toggleScanScope( _ sender: Any? )
+    {
+        guard let item = sender as? NSMenuItem, var scope = ScanScope( rawValue: item.tag ) else
+        {
+            return
+        }
+        
+        scope.isEnabled = scope.isEnabled == false
+        
+        item.state = scope.isEnabled ? .on : .off
+        
+        self.reload()
     }
     
     private func cleanZombies()
@@ -96,18 +278,27 @@ public class MainViewController: NSViewController, NSMenuDelegate
             
             defer { self.cleanLock.unlock() }
             
-            let all     = DerivedData.allDerivedData()
-            let zombies = all.filter { $0.zombie }
+            let all      = DerivedData.allDerivedData()
+            let zombies  = all.filter { $0.zombie }
+            let stale    = DerivedData.staleAutoCleanCandidates()
+            let toRemove = zombies + stale
             
             DispatchQueue.main.async
             {
-                self.arrayController.remove( contentsOf: zombies )
+                self.arrayController.remove( contentsOf: toRemove )
                 self.updateMenu()
             }
             
-            for zombie in zombies
+            for item in toRemove
             {
-                try? FileManager.default.removeItem( at: zombie.url )
+                let bytes = FileManager.default.sizeOfDirectory( at: item.url ) ?? 0
+                
+                try? FileManager.default.removeItem( at: item.url )
+                
+                if bytes > 0
+                {
+                    DispatchQueue.main.async { self.recordReclaimed( bytes: bytes ) }
+                }
             }
         }
     }
@@ -129,20 +320,15 @@ public class MainViewController: NSViewController, NSMenuDelegate
     
     public func reload( actionBefore: ( () -> Void )? = nil )
     {
-        self.title   = "Derived Data — Loading..."
+        self.title   = "Xcode Caches — Loading..."
         self.loading = true
         
         DispatchQueue.global( qos: .userInitiated ).async
         {
             actionBefore?()
             
-            let data = DerivedData.allDerivedData()
-            var size = UInt64( 0 )
-            
-            if let url = DerivedData.derivedDataURL
-            {
-                size = FileManager.default.sizeOfDirectory( at: url ) ?? 0
-            }
+            let data = DerivedData.allCleanableItems()
+            let size = DerivedData.totalSizeOfKnownCaches()
             
             DispatchQueue.main.async
             {
@@ -151,11 +337,11 @@ public class MainViewController: NSViewController, NSMenuDelegate
                 
                 if let humanSize = BytesToString().transformedValue( size ) as? String
                 {
-                    self.title = "Derived Data — \(humanSize)"
+                    self.title = "Xcode Caches — \(humanSize)"
                 }
                 else
                 {
-                    self.title = "Derived Data"
+                    self.title = "Xcode Caches"
                 }
                 
                 if( self.loadedOnce == false )
@@ -177,9 +363,16 @@ public class MainViewController: NSViewController, NSMenuDelegate
     {
         self.reload
         {
+            let bytes = FileManager.default.sizeOfDirectory( at: url ) ?? 0
+            
             do
             {
                 try FileManager.default.removeItem( at: url )
+                
+                if bytes > 0
+                {
+                    DispatchQueue.main.async { self.recordReclaimed( bytes: bytes ) }
+                }
             }
             catch let e
             {
@@ -193,15 +386,40 @@ public class MainViewController: NSViewController, NSMenuDelegate
     
     @objc private func deleteData( _ sender: Any? )
     {
+        var target: DerivedData?
+        
         if let data = sender as? DerivedData
         {
-            self.delete( url: data.url );
+            target = data
         }
         else if let item = sender                 as? NSMenuItem,
                 let data = item.representedObject as? DerivedData
         {
-            self.delete( url: data.url );
+            target = data
         }
+        
+        guard let data = target else
+        {
+            return
+        }
+        
+        if data.isArchive
+        {
+            let alert             = NSAlert()
+            alert.messageText     = "Delete Archive?"
+            alert.informativeText = "\"\(data.name)\" is an exported build archive, not a cache — it holds the dSYMs and bits you'd need to resubmit this exact build. Deleting it can't be undone."
+            alert.alertStyle      = .warning
+            
+            alert.addButton( withTitle: "Delete Archive" )
+            alert.addButton( withTitle: "Cancel" )
+            
+            if alert.runModal() != .alertFirstButtonReturn
+            {
+                return
+            }
+        }
+        
+        self.delete( url: data.url )
     }
     
     @IBAction private func deleteAll( _ sender: Any? )
@@ -324,6 +542,11 @@ public class MainViewController: NSViewController, NSMenuDelegate
             return true
         }
         
+        if menuItem.action == #selector( toggleScanScope(_:) )
+        {
+            return true
+        }
+        
         if self.tableView.clickedRow < 0
         {
             return false
@@ -388,6 +611,8 @@ public class MainViewController: NSViewController, NSMenuDelegate
         }
         else
         {
+            self.updateReclaimedStatsMenuItem()
+            
             if self.tableView.clickedRow < 0
             {
                 return

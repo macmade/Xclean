@@ -27,9 +27,32 @@ import Cocoa
 @objc public class Preferences: NSObject
 {
     @objc public dynamic var lastStart:           Date?
-    @objc public dynamic var autoCheckForUpdates: Bool = true
-    @objc public dynamic var autoClean:           Bool = false
-    @objc public dynamic var compactView:         Bool = false
+    @objc public dynamic var autoCheckForUpdates: Bool   = true
+    @objc public dynamic var autoClean:           Bool   = false
+    @objc public dynamic var compactView:         Bool   = false
+    
+    /*
+     * Running lifetime stats -- how much space Xclean has ever reclaimed,
+     * and when it last did so (manual delete or automatic clean, either
+     * one). Persisted through the same generic Mirror-based UserDefaults
+     * mechanism as everything else in this class.
+     */
+    @objc public dynamic var totalBytesReclaimed: UInt64 = 0
+    @objc public dynamic var lastCleanedAt:       Date?
+    
+    /*
+     * Which cache categories Xclean actually looks at. All default to true
+     * so behavior is unchanged until someone opts a category out from the
+     * "Scan For" submenu. DerivedData and ModuleCache share one switch --
+     * they live in the same root folder on disk, so splitting them would
+     * make the on-disk size total unreliable.
+     */
+    @objc public dynamic var scanDerivedData:     Bool = true
+    @objc public dynamic var scanSimulatorCache:  Bool = true
+    @objc public dynamic var scanDeviceSupport:   Bool = true
+    @objc public dynamic var scanSPMCache:        Bool = true
+    @objc public dynamic var scanPodsCache:       Bool = true
+    @objc public dynamic var scanArchives:        Bool = true
     
     @objc public static let shared = Preferences()
     

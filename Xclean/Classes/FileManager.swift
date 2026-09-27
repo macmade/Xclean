@@ -57,4 +57,48 @@ public extension FileManager
         
         return size
     }
+    
+    /*
+     * The most recent modification date of any file inside `url`, recursing
+     * into subdirectories -- used to decide whether a cache root has been
+     * "touched" recently enough to leave alone. A directory's own mtime only
+     * updates when its direct children change, which misses activity nested
+     * deeper inside (e.g. a Swift package cache), so this scans the same way
+     * sizeOfDirectory(at:) does rather than trusting the root's own mtime.
+     */
+    func lastModifiedInDirectory( at url: URL ) -> Date?
+    {
+        var isDir = ObjCBool( booleanLiteral: false )
+        
+        if self.fileExists( atPath: url.path, isDirectory: &isDir ) == false || isDir.boolValue == false
+        {
+            return nil
+        }
+        
+        guard let enumerator = self.enumerator( at: url, includingPropertiesForKeys: [ .contentModificationDateKey ] ) else
+        {
+            return nil
+        }
+        
+        var latest: Date?
+        
+        for ( _, object ) in enumerator.enumerated()
+        {
+            guard let sub = object as? URL else
+            {
+                continue
+            }
+            
+            if let res  = try? sub.resourceValues( forKeys: [ .contentModificationDateKey ] ),
+               let date = res.contentModificationDate
+            {
+                if latest == nil || date > latest!
+                {
+                    latest = date
+                }
+            }
+        }
+        
+        return latest ?? ( try? url.resourceValues( forKeys: [ .contentModificationDateKey ] ) )?.contentModificationDate
+    }
 }
